@@ -11,7 +11,7 @@ class Solution1:
             if (complement in nums[i+1:]):
                 return [i, nums[i+1:].index(complement) + i + 1]
 
-
+ 
 # hashMap
 class Solution2:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
