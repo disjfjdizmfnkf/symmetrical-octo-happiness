@@ -17,7 +17,7 @@
     所以排除相邻情况 fast - slow > 1
 """
 
-class Solution:
+class Solution1:
     def removeDuplicates(self, nums: List[int]) -> int:
         slow, fast = 0, 1
         while (fast < len(nums)):
@@ -26,3 +26,13 @@ class Solution:
                 nums[slow] = nums[fast]
             fast = fast + 1
         return slow + 1
+
+# 我们在同一个世界吗.jpg
+class Solution2:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        i = 0
+        for n in nums:
+            if i < 1 or n > nums[i-1]:
+                nums[i] = n
+                i += 1
+        return i
