@@ -1,7 +1,7 @@
 
 
 # 我们在同一个世界吗.jpg
-class Solution:
+class Solution1:
     def removeDuplicates(self, nums: List[int]) -> int:
         i = 0
         for n in nums:
