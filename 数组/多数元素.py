@@ -10,7 +10,7 @@ class Solution1:
             if hashMap[i] > threshold:
                 return i
         
-# Boyer-Moore 投票算法  摩尔投票算法
+# Boyer-Moore 投票算法 摩尔投票算法
 class Solution2:
     def majorityElement(self, nums: List[int]) -> int:
       res, count =0, 0
