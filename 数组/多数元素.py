@@ -13,18 +13,12 @@ class Solution1:
 # Boyer-Moore 投票算法  摩尔投票算法
 class Solution2:
     def majorityElement(self, nums: List[int]) -> int:
-        cand_num = nums[0]
-        count = 1
-        for i in nums:
-          if i == cand_num:
-            count += 1
-          else:
-            count -= 1
-            if count == 0:
-              cand_num = i
-              count = 1
-        return cand_num
-
+      res, count =0, 0
+      for n in nums:
+          if count == 0:
+            res = n
+          count += (1 if n == res else -1)
+      return res
 
 # 先排序再看 时间复杂度O(nlogn)
 class Solution3:
