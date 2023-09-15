@@ -1,5 +1,5 @@
 
-# 快慢指针，一个负责前部分返回的元素，一个在后半访问元素
+# 快慢指针，一个在前面选择元素，一个在后只管覆盖
 
 class Solution1:
     def removeElement(self, nums: List[int], val: int) -> int:
@@ -8,6 +8,6 @@ class Solution1:
             if nums[fast] != val:
                 nums[slow] = nums[fast]
                 slow = slow + 1
-            fast = fast + 1
+            fast = fast + 1  #nums[fast]等于val时，跳过这个位置
         return slow
 
