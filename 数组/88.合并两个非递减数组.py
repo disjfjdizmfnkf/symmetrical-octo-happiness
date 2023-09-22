@@ -23,7 +23,7 @@ class Solution2:
         p, q = m-1, n-1
         i = m + n - 1
         while q > 0:
-            if p1 >= 0 and nums1[p1] > nums2[p2]: #只有该数组不为空，且比另一个大才换
+            if p1 >= 0 and nums1[p1] > nums2[p2]: #只有该数组不为空（注意等于0也是不为空），且比另一个大才换
                 nums1[p] = nums1[p1]  # 填入 nums1[p1]
                 p1 -= 1
             else:
