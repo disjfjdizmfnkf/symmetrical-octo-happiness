@@ -21,3 +21,4 @@ class Solution1:
         for i in range(len(res)-1):
             minNum = min(minNum, abs(res[i] - res[i+1]))
         return minNum
+ 
