@@ -1,4 +1,4 @@
-# 双指针
+# 双指针 floyd循环检测算法 龟兔赛跑算法
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         slow_pointer = head
