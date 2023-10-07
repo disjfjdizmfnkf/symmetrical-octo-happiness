@@ -5,6 +5,7 @@
 #         self.left = left
 #         self.right = right
 
+                ##########                      这是二叉搜索树                            ###########
 # 中序遍历 （从小到大）
 class Solution1:
     def inOder(self, root: TreeNode, res):
