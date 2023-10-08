@@ -36,3 +36,5 @@ class Solution2:
                 nums[i] = nums[j]             # 如果nums[j]>nums[j-1] nums[j]一定是新元素
                 i += 1  #为下一次迎接新元素准备
         return i
+
+   """这个方法巧妙的用 if i < 1 or nums[j] > nums[j-1]: 判断了元素是否为新"""
