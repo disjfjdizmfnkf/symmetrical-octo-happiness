@@ -27,12 +27,12 @@ class Solution1:
             fast = fast + 1
         return slow + 1
 
-# 我们在同一个世界吗.jpg
+# 隐双指针  我们在同一个世界吗.jpg
 class Solution2:
     def removeDuplicates(self, nums: List[int]) -> int:
         i = 0
-        for n in nums:
-            if i < 1 or n > nums[i-1]:
-                nums[i] = n
-                i += 1
+        for j in range(len(nums)):
+            if i < 1 or nums[j] > nums[j-1]:  # i < 1 按照题意开头第一个一定不重复
+                nums[i] = nums[j]             # 如果nums[j]>nums[j-1] nums[j]一定是新元素
+                i += 1  #为下一次迎接新元素准备
         return i
