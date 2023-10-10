@@ -1,7 +1,7 @@
 
 
 # 递归
-class Solution:
+class Solution1:
     def countNodes(self, root: Optional[TreeNode]) -> int:
         def countHelper(root, n):
             if not root:
