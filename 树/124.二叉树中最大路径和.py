@@ -12,6 +12,7 @@ class Solution1:
                 return 0
 
             # 递归计算左右子树的最大路径和，并取其中较大的一个
+            # 和0比较是因为我们尽量让路径增加( > 0)而不是减少
             left_sum = max(maxPathSumHelper(node.left), 0)
             right_sum = max(maxPathSumHelper(node.right), 0)
 
