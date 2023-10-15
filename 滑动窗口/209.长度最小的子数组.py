@@ -9,6 +9,6 @@ class Solution1:
             total += nums[r]  # 向左边滑动增大值
             while total >= target:  # 满足条件了，我们尝试去找到最小窗口
                 res = min(r - l + 1, res)
-                total -= nums[l]
+                total -= nums[l] # 向右边滑动减小值
                 l += 1
         return 0 if res == float("inf") else res
