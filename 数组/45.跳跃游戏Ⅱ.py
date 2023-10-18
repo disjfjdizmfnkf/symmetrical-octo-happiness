@@ -11,7 +11,7 @@ class Solution1:
                 farthest = max(farthest, i + nums[i])
             jumpCount += 1
             l = r + 1
-            r = farthe
+            r = farthest
         return jumpCount
 
 # 贪心
