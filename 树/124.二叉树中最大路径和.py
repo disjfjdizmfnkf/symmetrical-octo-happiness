@@ -1,27 +1,27 @@
 
 
 # 递归 nonlocal 变量
-class Solution1:
+# 路径没有分叉！
+class Solution:
+    """
+    在这个问题中，答案是需要最大路径，
+    需要递归解决的确是（返回没有分支的子树的最大路径）
+    所以递归函数不一定可以直接解决问题，所以需要辅助函数和全局变量
+    总之每次调用的子问题做两件事：
+    1.返回以当前调用节点分叉的最大路径
+    2.返回以当前节点为不分叉的最大路径
+    """
+
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
-        max_sum = float('-inf')  # 全局最大路径和的初始值
+        maxSum = [float('-inf')]
 
-        def maxPathSumHelper(node):
-            nonlocal max_sum  # 引用外部的 max_sum 变量
-
-            if not node:
+        def helper(node):  # why use helper function?   to return res
+            if not node:  # 辅助函数的作用是返回以当前节点为根节点的最大路径，并且更新全局变量
                 return 0
+            leftMax = max(helper(node.left), 0)
+            rightMax = max(helper(node.right), 0)
+            maxSum[0] = max(maxSum[0], leftMax + rightMax + node.val)
+            return max(leftMax, rightMax) + node.val  # 只能选一个方向
 
-            # 递归计算左右子树的最大路径和，并取其中较大的一个
-            # 和0比较是因为我们尽量让路径增加( > 0)而不是减少
-            left_sum = max(maxPathSumHelper(node.left), 0)
-            right_sum = max(maxPathSumHelper(node.right), 0)
-
-            # 更新全局最大路径和
-            max_sum = max(max_sum, node.val + left_sum + right_sum)
-
-            # 返回以当前节点为起点的最大路径和（只能选择左子树或右子树的一条路径）
-            return node.val + max(left_sum, right_sum)
-
-        maxPathSumHelper(root)  # 调用辅助函数开始计算
-
-        return max_sum
+        helper(root)
+        return maxSum[0]
