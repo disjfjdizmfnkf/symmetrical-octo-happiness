@@ -11,7 +11,7 @@ class Solution:
     1.返回以当前调用节点分叉的最大路径
     2.返回以当前节点为不分叉的最大路径
     """
-
+# DFS
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
         maxSum = [float('-inf')]
 
