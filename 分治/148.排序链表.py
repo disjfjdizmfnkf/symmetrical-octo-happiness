@@ -19,7 +19,7 @@ class Solution:
         return self.merge(left, right)
 
     def gitMid(self, head):  # 使用双指针寻找中间节点
-        slow, fast = head, head.next
+        slow, fast = head, head.next         # 所以为什么开始不能给fast赋值head？？？？？？？？？？
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
