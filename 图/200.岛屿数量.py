@@ -13,9 +13,34 @@ from typing import List
 输出：1
 """
 
+# bfs递归 使用#标记已经访问的点而不是存储结构，节省内存
+class Solution1:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        if not grid:
+            return 0
 
-# 使用BFS找到所有的岛屿
-class Solution:
+        lands = 0
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
+                if grid[r][c] == '1':
+                    self.dfs(grid, r, c)
+                    lands += 1
+        return lands
+
+    def dfs(self, grid, row, col):
+        if (row < 0 or col < 0 or row >= len(grid)
+                or col >= len(grid[0]) or grid[row][col] != '1'):
+            return
+
+        grid[row][col] = '#'
+        self.dfs(grid, row + 1, col)
+        self.dfs(grid, row, col + 1)
+        self.dfs(grid, row - 1, col)
+        self.dfs(grid, row, col - 1)
+
+
+# 使用BFS遍历  找到所有的岛屿
+class Solution2:
     def numIslands(self, grid: List[List[str]]) -> int:
         if not grid:
             return
@@ -46,3 +71,39 @@ class Solution:
                     lands += 1
         return lands
 
+# 最好的方法，使用并查集
+class Solution3:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        if not grid:
+            return 0
+
+        rows, cols = len(grid), len(grid[0])
+        lands = 0
+        parent = [i for i in range(rows * cols)]  # 初始化并查集
+        rank = [0] * (rows * cols)  # 初始化并查集
+        def find(x):
+            if parent[x] != x:
+                parent[x] = find(parent[x])  # 路径压缩
+            return parent[x]
+
+        def union(x, y):
+            x, y = find(x), find(y)
+            if x == y:
+                return
+            if rank[x] < rank[y]:  # 按秩合并
+                x, y = y, x
+            parent[y] = x
+            rank[x] += 1
+
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == '1':
+                    grid[r][c] = '0'
+                    lands += 1
+                    for dr, dc in [[1, 0], [-1, 0], [0, 1], [0, -1]]:
+                        row, col = r + dr, c + dc
+                        if (row in range(rows) and
+                            col in range(cols) and
+                            grid[row][col] == '1'):
+                            union(r * cols + c, row * cols + col)
+        return lands
