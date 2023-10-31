@@ -70,40 +70,8 @@ class Solution2:
                     bfs(r, c)
                     lands += 1
         return lands
+# 并查集
+# class Solution3:
+#     def numIslands(self, grid: List[List[str]]) -> int:
 
-# 最好的方法，使用并查集
-class Solution3:
-    def numIslands(self, grid: List[List[str]]) -> int:
-        if not grid:
-            return 0
 
-        rows, cols = len(grid), len(grid[0])
-        lands = 0
-        parent = [i for i in range(rows * cols)]  # 初始化并查集
-        rank = [0] * (rows * cols)  # 初始化并查集
-        def find(x):
-            if parent[x] != x:
-                parent[x] = find(parent[x])  # 路径压缩
-            return parent[x]
-
-        def union(x, y):
-            x, y = find(x), find(y)
-            if x == y:
-                return
-            if rank[x] < rank[y]:  # 按秩合并
-                x, y = y, x
-            parent[y] = x
-            rank[x] += 1
-
-        for r in range(rows):
-            for c in range(cols):
-                if grid[r][c] == '1':
-                    grid[r][c] = '0'
-                    lands += 1
-                    for dr, dc in [[1, 0], [-1, 0], [0, 1], [0, -1]]:
-                        row, col = r + dr, c + dc
-                        if (row in range(rows) and
-                            col in range(cols) and
-                            grid[row][col] == '1'):
-                            union(r * cols + c, row * cols + col)
-        return lands
