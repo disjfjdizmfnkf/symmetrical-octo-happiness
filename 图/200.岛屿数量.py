@@ -51,7 +51,7 @@ class Solution2:
 
         def bfs(r, c):   # 广度优先，从点扩大到整个岛屿找到所有相连部分
             visited.add((r, c))
-            queue = []    # bfs，dfs都要借助存储结构
+            queue = []    # 完成bfs，dfs要借助存储结构 否则 递归
             queue.append((r, c))
             direction = [[1, 0], [-1, 0], [0, 1], [0, -1]]
             while queue:
