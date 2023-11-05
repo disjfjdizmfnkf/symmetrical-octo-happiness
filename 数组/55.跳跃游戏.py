@@ -1,4 +1,17 @@
 
+
+# 贪心算法 第二次写
+class Solution2:
+    def canJump(self, nums: List[int]) -> bool:
+        dis = 0
+        for i in range(len(nums)):
+            if i <= dis:  # i必须满足在能跳跃的范围内跳
+                dis = max(i + nums[i], dis)
+        if dis >= len(nums) - 1:
+            return True
+        return False
+
+
 # 改变遍历范围
 class Solution1:
     def canJump(self, nums: List[int]) -> bool:
@@ -10,3 +23,4 @@ class Solution1:
             if dis >= len(nums) - 1:
                 return True
         return False
+
