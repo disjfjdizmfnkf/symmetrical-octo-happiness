@@ -10,11 +10,15 @@
 
 """
 
-#窗口滑动   把所有向上增长的一段一段加起来
-class Solution1:
+#   贪心算法
+#   窗口滑动
+
+#   这道题不用双指针的原因是：我们可以用每天都赚钱的方法算出最大利润，
+# 所以双指针(例如i j之间的差值是一定的)，我们可以直接对指针做常量的加减
+class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         profit = 0
-        for i in range(1, len(prices)):
-            if prices[i] > prices[i-1]:
-                profit += (prices[i] - prices[i-1])
+        for i in range(len(prices) - 1):
+            if prices[i + 1] > prices[i]:  # 每天能赚到钱就赚
+                profit += (prices[i + 1] - prices[i])
         return profit
