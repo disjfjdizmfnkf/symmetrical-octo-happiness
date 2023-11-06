@@ -13,30 +13,13 @@ from typing import List
 输出：1
 """
 
-# bfs递归 使用#标记已经访问的点而不是存储结构，节省内存
-class Solution1:
-    def numIslands(self, grid: List[List[str]]) -> int:
-        if not grid:
-            return 0
 
-        lands = 0
-        for r in range(len(grid)):
-            for c in range(len(grid[0])):
-                if grid[r][c] == '1':
-                    self.dfs(grid, r, c)
-                    lands += 1
-        return lands
 
-    def dfs(self, grid, row, col):
-        if (row < 0 or col < 0 or row >= len(grid)
-                or col >= len(grid[0]) or grid[row][col] != '1'):
-            return
+# 并查集
+# class Solution1:
+#     def numIslands(self, grid: List[List[str]]) -> int:
 
-        grid[row][col] = '#'
-        self.dfs(grid, row + 1, col)
-        self.dfs(grid, row, col + 1)
-        self.dfs(grid, row - 1, col)
-        self.dfs(grid, row, col - 1)
+
 
 
 # 使用BFS遍历  找到所有的岛屿
@@ -70,8 +53,28 @@ class Solution2:
                     bfs(r, c)
                     lands += 1
         return lands
-# 并查集
-# class Solution3:
-#     def numIslands(self, grid: List[List[str]]) -> int:
 
+# bfs递归 使用#标记已经访问的点而不是存储结构，节省内存
+class Solution3:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        if not grid:
+            return 0
 
+        lands = 0
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
+                if grid[r][c] == '1':
+                    self.dfs(grid, r, c)
+                    lands += 1
+        return lands
+
+    def dfs(self, grid, row, col):
+        if (row < 0 or col < 0 or row >= len(grid)
+                or col >= len(grid[0]) or grid[row][col] != '1'):
+            return
+
+        grid[row][col] = '#'
+        self.dfs(grid, row + 1, col)
+        self.dfs(grid, row, col + 1)
+        self.dfs(grid, row - 1, col)
+        self.dfs(grid, row, col - 1)
