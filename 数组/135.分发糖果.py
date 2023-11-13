@@ -5,7 +5,7 @@ class Solution:
         n = len(ratings)
         res = [1]*n
 
-        #  从左往右，给左边的加，保证右边比左边大的糖果多  右边大的糖果多 小的为一不变
+        #  保证右边都比左边大(糖果数)，这也是为什么用右边和左边比较的原因
         for i in range(1, n):
             if ratings[i - 1] < ratings[i]:
                 res[i] = res[i - 1] + 1  # 保证比右边大，不是简单的加1
