@@ -27,13 +27,13 @@ class Solution1:
             fast = fast + 1
         return slow + 1
 
-# 隐双指针  我们在同一个世界吗.jpg
+# 隐双指针  不是删除，而是覆盖
 class Solution2:
     """这个方法巧妙的用 if i < 1 or nums[j] > nums[j-1]: 判断了元素是否为新"""
     def removeDuplicates(self, nums: List[int]) -> int:
         i = 0
-        for num in nums:                   #为什么不和nums[i]比？ 因为nums[i]不是已经筛选过的元素
-            if i < 1 or nums > nums[i-1]:  # i < 1 按照题意开头第一个一定不重复
-                nums[i] = nums             # 如果nums > nums[i-1] nums一定是新元素
+        for n in nums:
+            if i < 1 or n > nums[i-1]:  #为什么不和nums[i]比？ i - 1 才是之前元素的位置，i是将来的存放位
+                nums[i] = n
                 i += 1  #为下一次迎接新元素准备
         return i
