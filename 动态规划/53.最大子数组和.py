@@ -1,34 +1,24 @@
 
-
-# 动态规划 时间复杂度O(n)  空间复杂度O(n)
+# 动态规划 时间复杂度O(n)  空间复杂度O(1)
 class Solution1:
     def maxSubArray(self, nums: List[int]) -> int:
-        maxSub = nums[0]   # 容易出错，想想为什么不设置为0             数组中有负数
-        nowSub = nums[0]
+        best = nums[0]           # 数组中有负数，best不一定为0
+        now = 0
+        for i in nums:
+            if now < 0:  # 当前和为负数，一定不包含在之后的最大连续数组内
+                now = 0
+            now += i
+            # best = max(best, now)  换成下面更快
+            if best < now:
+                best = now
+        return best
 
-        for n in nums:
-            if nowSub < 0:
-                nowSub = 0
-            nowSub += n
-            maxSub = max(maxSub, nowSub)
-        return maxSub
-
-# 动态规划 时间复杂度O(n)  空间复杂度O(1)
-class Solution2:
-    def maxSubArray(self, nums: List[int]) -> int:
-        maxSub = nums[0]   # 容易出错，想想为什么不设置为0             数组中有负数
-        nowSub = nums[0]
-
-        for n in nums:
-            nowSub = max(nowSub + n, n)
-            maxSub = max(maxSub, nowSub)
-        return maxSub
 
 
 
 # 没掌握
 # 分治法 时间复杂度O(nlogn)  空间复杂度O(logn)
-class Solution3:
+class Solution2:
     def maxSubArray(self, nums: List[int]) -> int:
         def helper(nums, l, r):
             if l == r:
