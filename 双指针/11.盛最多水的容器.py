@@ -1,6 +1,8 @@
 
-#
-class Solution:
+# 双指针
+
+# 一开始宽度最大，所以只有为两个边找更高的边界才有意义
+class Solution1:
     def maxArea(self, height: List[int]) -> int:
         l, r = 0, len(height) - 1
         best = (r - l) * min(height[r], height[l])
@@ -14,7 +16,7 @@ class Solution:
         return best
 
 # 优化过后
-class Solution:
+class Solution2:
     def maxArea(self, height: List[int]) -> int:
         l, r = 0, len(height) - 1
         best = (r - l) * min(height[r], height[l])
