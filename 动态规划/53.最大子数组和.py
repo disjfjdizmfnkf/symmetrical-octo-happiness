@@ -8,9 +8,7 @@ class Solution1:
             if now < 0:  # 当前和为负数，一定不包含在之后的最大连续数组内
                 now = 0
             now += i
-            # best = max(best, now)  换成下面更快
-            if best < now:
-                best = now
+            best = max(best, now) # 更快的写法: if best < now : best = now
         return best
 
 
