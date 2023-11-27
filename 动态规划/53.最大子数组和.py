@@ -1,4 +1,7 @@
 
+# 把这个当作贪心问题更好理解， 如果看作是动态规划，那么就是一个一维的动态规划，
+# 那么问题就是以d[i]结尾的的最大子序和
+
 # 动态规划 时间复杂度O(n)  空间复杂度O(1)
 class Solution1:
     def maxSubArray(self, nums: List[int]) -> int:

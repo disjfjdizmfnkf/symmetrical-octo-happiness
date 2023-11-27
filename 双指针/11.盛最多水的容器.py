@@ -1,37 +1,34 @@
 
 # 双指针
+class Solution:
+    def maxArea(self, height: List[int]) -> int: # 越宽越高 越好
+        # # 一开始最宽就好
+        # l, r = 0, len(height) - 1
+        # best = 0
+        # most_height = max(height)
+        # now_expected_best = most_height * (r - l)
+        # while l < r:
+        #     best = max(best, (r - l) * min(height[r], height[l]))
+        #     if height[l] < height[r]: # 保证宽减小最少，但获得更高的边
+        #         l += 1
+        #     else:
+        #         r -= 1
+        # return best
 
-# 一开始宽度最大，所以只有为两个边找更高的边界才有意义
-class Solution1:
-    def maxArea(self, height: List[int]) -> int:
         l, r = 0, len(height) - 1
-        best = (r - l) * min(height[r], height[l])
+
+        best = 0
+        most_height = max(height)
+
         while l < r:
-            if height[l] > height[r]:
-                r -= 1
-            else:
+            best = max(best, (r - l) * min(height[r], height[l]))
+            if height[l] < height[r]:
                 l += 1
-            water = (r - l) * min(height[r], height[l])
-            best = max(best, water)
-        return best
-
-# 优化过后
-class Solution2:
-    def maxArea(self, height: List[int]) -> int:
-        l, r = 0, len(height) - 1
-        best = (r - l) * min(height[r], height[l])
-        while l < r:
-            if height[l] > height[r]:
-                i = r - 1
-                while l < r and height[r] > height[i]:
-                    i -= 1
-                r = i
             else:
-                i = l + 1
-                while l < r and height[l] > height[i]:
-                    i += 1
-                l = i
-            water = (r - l) * min(height[r], height[l])
-            if best < water:
-                best = water
+                r -= 1
+
+            now_expected_best = most_height * (r - l)  # 方便理解now_expected_best 就是当前我们yy的最好结果
+            if best >= now_expected_best:
+                break
+
         return best

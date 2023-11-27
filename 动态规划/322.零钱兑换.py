@@ -1,3 +1,10 @@
+# 阶段性总结一下动态规划
+# 我遇见的要么是自下而上求解到原始问题，要么是自上而下求解到原始问题
+# 例如爬楼梯，自下而上求解到原始问题 这道题也是自下而上求解原始问题
+# 自上而下求解原始问题的话，就是从原始问题开始，逐步求解到子问题
+# 例如斐波那契数列
+
+
 # 自下而上的动态规划dp
 class Solution1:
     def coinChange(self, coins: List[int], amount: int) -> int:
@@ -10,7 +17,8 @@ class Solution1:
         return dp[amount] if dp[amount] != amount + 1 else -1
     # 为什么不能组成总金额时，dp[amount] 为默认值 amount + 1
 
-# 位运算
+# 位运算 不懂
+
 ############## 位运算 ####################
 # 位运算的思路：将 1 向左移 amount 位
 # 然后根据 coins，不断地向右移，直到 1 回到最后一位。这样做的好处是：
@@ -31,14 +39,11 @@ class Solution1:
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         if not amount: return 0
-
         dp = 1 << amount
-
         for i in range(amount // min(coins)):
             tmp = 0
             for c in coins:
                 tmp |= dp >> c
                 if tmp & 1: return i + 1
             dp = tmp
-
         return -1
