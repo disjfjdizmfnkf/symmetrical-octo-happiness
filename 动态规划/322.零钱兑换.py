@@ -6,15 +6,15 @@
 
 
 # 自下而上的动态规划dp
-class Solution1:
+class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        dp = [amount + 1] * (amount + 1)
-        dp[0] = 0
-        for i in range(1, amount + 1):
+        L = [amount + 1] * (amount + 1)
+        L[0] = 0 # 0元需要0个硬币
+        for i in range(1, amount + 1): # 注意范围
             for coin in coins:
-                if i - coin >= 0:
-                    dp[i] = min(dp[i], 1 + dp[i - coin])
-        return dp[amount] if dp[amount] != amount + 1 else -1
+                if i - coin >= 0: # find sub_problem
+                    L[i] = min(1 + L[i - coin], L[i])  # 在子问题中挑选最优解
+        return L[amount] if L[amount] != amount + 1 else -1
     # dp[amount] 为默认值 amount + 1 最大
 
 # 更加好懂的方法
