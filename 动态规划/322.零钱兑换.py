@@ -15,9 +15,21 @@ class Solution1:
                 if i - coin >= 0:
                     dp[i] = min(dp[i], 1 + dp[i - coin])
         return dp[amount] if dp[amount] != amount + 1 else -1
-    # 为什么不能组成总金额时，dp[amount] 为默认值 amount + 1
+    # dp[amount] 为默认值 amount + 1 最大
 
-# 位运算 不懂
+# 更加好懂的方法
+class Solution2:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        L = [amount + 1] * (amount + 1)
+        L[0] = 0  # 0元需要0个硬币
+        for i in range(1, amount + 1):
+            sub_problem = [L[i - k] for k in coins if i - k >= 0 and L[i - k] != amount + 1]  # 找到所有有效的子问题
+            if sub_problem:
+                L[i] = min(sub_problem) + 1
+        return -1 if L[amount] == amount + 1 else L[amount]
+
+
+# 位运算 看看得了
 
 ############## 位运算 ####################
 # 位运算的思路：将 1 向左移 amount 位
