@@ -15,8 +15,8 @@ class Solution2:
         L = [0] * (len(triangle) + 1)
 
         for i in triangle[::-1]:
-            for k, v in enumerate(i):
-                L[k] = v + min(L[k + 1], L[k])
+            for k in range(len(i)):
+                L[k] = i[k] + min(L[k], L[k + 1])
         return L[0]
 
 # 记得要画图，画完图思考子问题之间的关系，不要用那个模板解题了
