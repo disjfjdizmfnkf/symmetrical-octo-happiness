@@ -14,11 +14,11 @@ class Solution:
         target_row = -1
         while top <= bottom:
             m = top + (bottom - top) // 2
-            if matrix[m][cols - 1] < target:
+            if matrix[m][cols - 1] < target:  # 让top逼近target，top不会超过target行
                 top = m + 1
             else:
-                target_row = m
-                bottom = m - 1
+                target_row = m  # 否则目标行在m或者m的上面
+                bottom = m - 1  # 逼近目标行
         if target_row == -1:
             return False
 
