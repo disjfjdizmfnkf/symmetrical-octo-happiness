@@ -15,6 +15,5 @@ class Solution1:
 
 # 运用python的内置函数
 class Solution2:
-
     def combine(self, n: int, k: int) -> List[List[int]]:
         return list(itertools.combinations(range(1, n+1), k))
