@@ -13,4 +13,4 @@ class Solution:
 
         backTrack([], candidates, target)
 
-        return list(res)
+        return res
