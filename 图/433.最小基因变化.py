@@ -13,11 +13,11 @@ class Solution:
 
         while queue:
             size = len(queue)
-            for i in range(size):  # 按层处理元素，类比树的层序遍历
+            for i in range(size):  # 按层处理元素，类比树的层序遍历,一层代表一次(在基因库中的)变化
                 gene = queue.popleft()
                 if gene == endGene:
                     return count
-                for j in range(8):
+                for j in range(8):  # 寻找在基因库中的一次有效的变化
                     for option in options:
                         newGene = gene[:j] + option + gene[j + 1:]
                         if newGene in bankSet and newGene not in visited:
