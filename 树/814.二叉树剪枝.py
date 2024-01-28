@@ -5,17 +5,9 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def pruneTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        # if not root:
-        #     return None
-
-        # left = self.pruneTree(root.left)
-        # right = self.pruneTree(root.right)
-
-        # if root.val == 0 and left is None and right is None:
-        #     root.val = None
-
-        # return root
+    def pruneTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:  # 返回剪枝后的树
+        # 不是在原树上剪枝，而是返回剪枝后的树，和cpp引用类型不同
+        # 从底部开始往上剪枝就只有两种base case，叶子节点和空节点
         if not root:
             return None
 
@@ -23,6 +15,6 @@ class Solution:
         root.right = self.pruneTree(root.right)
 
         if root.val == 0 and not root.left and not root.right:
-            return None
+            root.val = None
 
         return root
