@@ -8,7 +8,7 @@ class Solution:
         # 想法二：第一次遍历把0所在的行和列记下来，第二次遍历直接改变记录的行列
         rows, cols = len(matrix), len(matrix[0])
         seen = set()
-        # 行 (r,0) : 列(c,0)
+        # 行 (r,0) : 列(c,0) 这两个类别一定要不相交 比如(0, c)也不行
         for r in range(rows):
             for c in range(cols):
                 if matrix[r][c] == 0:
