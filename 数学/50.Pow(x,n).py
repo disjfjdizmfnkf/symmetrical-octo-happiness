@@ -5,16 +5,20 @@
 # 递归 时间复杂度O(log n)
 class Solution1:
     def myPow(self, x: float, n: int) -> float:
+        # base cases
+        if n == 1:
+            return x
         if n == 0:
-            return 1.0
+            return 1
         if n < 0:
-            n = -n
-            x = 1 / x
+            return self.myPow(1 / x, -n)
 
-        half = self.myPow(x, n // 2) #分治思想 求该问题的子问题 求它的一半
+        # 每次少算一半
         if n % 2 == 0:
+            half = self.myPow(x, n // 2)
             return half * half
         else:
+            half = self.myPow(x, n // 2)
             return x * half * half
 
 # 迭代
