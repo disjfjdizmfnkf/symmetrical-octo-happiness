@@ -1,9 +1,14 @@
 class Solution:
-    def minPathSum(self, grid: [[int]]) -> int:
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                if i == j == 0: continue
-                elif i == 0:  grid[i][j] = grid[i][j - 1] + grid[i][j]
-                elif j == 0:  grid[i][j] = grid[i - 1][j] + grid[i][j]
-                else: grid[i][j] = min(grid[i - 1][j], grid[i][j - 1]) + grid[i][j]
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        # 预处理
+        for i in range(1, m):
+            grid[i][0] += grid[i - 1][0]
+        for i in range(1, n):
+            grid[0][i] += grid[0][i - 1]
+
+        for i in range(1, m):
+            for j in range(1, n):
+                grid[i][j] += min(grid[i - 1][j], grid[i][j - 1])
+
         return grid[-1][-1]
