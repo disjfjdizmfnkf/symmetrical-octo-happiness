@@ -5,17 +5,16 @@
 #         self.left = left
 #         self.right = right
 
-
-# 递归地创造
-class Solution1:
+# 高度平衡二叉树左右两个子树高度差不超过1
+class Solution:
     def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
         if not nums:
-            return None
-        midNum = len(nums)//2
-        left = nums[:midNum]    #python []不带最后一个，就是没有含midNum
-        right = nums[midNum+1:] #不含midNum
-
-        node = TreeNode(nums[midNum])
-        node.left = self.sortedArrayToBST(left)
-        node.right = self.sortedArrayToBST(right)
+            return
+        mid_index = len(nums)//2
+        root = nums[mid_index]
+        # left_part = nums[:mid_index]
+        # right_part = nums[mid_index + 1:]
+        left_tree = self.sortedArrayToBST(nums[:mid_index])
+        right_tree = self.sortedArrayToBST(nums[mid_index + 1:])
+        node = TreeNode(root, left_tree, right_tree)
         return node
