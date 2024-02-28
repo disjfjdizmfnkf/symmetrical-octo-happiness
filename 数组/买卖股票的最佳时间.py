@@ -1,19 +1,12 @@
-#https://www.youtube.com/watch?v=1pkOgXD63yU&t=21s
-#https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/?envType=study-plan-v2&envId=top-interview-150
-
-
-
-
-#双指针 动态规划  一个(为最高点)遍历所有点，一个越来越低找最低点
+#动态规划  一个(为最高点)遍历所有点，一个越来越低找最低点
 class Solution:
+    # method: 从左往右计算所有利润(并且以之前的最低价买入)
     def maxProfit(self, prices: List[int]) -> int:
-        maxP = 0
-        l, r = 0, 1
-        while r < len(prices):
-            if prices[l] < prices[r]:
-                profit = prices[r] - prices[l]
-                maxP = max(profit, maxP)
-            else:  #如果不是prices[l] < prices[r]的话，说明现在的r位置价格更低
-                l = r
-            r += 1
-        return maxP
+        low = prices[0]
+        profit = 0
+        for p in prices:
+            if p > low:
+                profit = max(profit, p - low)
+            else:
+                low = p
+        return profit
