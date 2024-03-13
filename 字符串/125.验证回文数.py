@@ -13,7 +13,10 @@ class Solution1:
 
 # 双指针  先处理字符串
 """
-    char.isalnum() 数字和字符返回True 其他返回False
+    c.isalnum() 判断一个字符是否为字母或数字,返回布尔值。
+    c.lower() 将一个字符转换为小写。
+    使用一个生成器表达式 (c.lower() for c in text if c.isalnum()) 从原始字符串中过滤出所有字母和数字字符,并将它们转换为小写。
+    使用 ''.join(...) 将生成器表达式中的所有字符连接成一个新的字符串。
 """
 class Solution2:
     def isPalindrome(self, s: str) -> bool:
@@ -25,3 +28,11 @@ class Solution2:
             l += 1
             r -= 1
         return True
+
+# 运用正则表达式
+import re
+
+class Solution3:
+    def isPalindrome(self, s: str) -> bool:
+        s = re.sub(r'[^a-zA-Z0-9]', '', s).lower()
+        return s == s[::-1]
