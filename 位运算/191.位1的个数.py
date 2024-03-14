@@ -5,7 +5,6 @@
 # 进制数奇偶性的一种方法
 
 
-
 # & 逻辑与    Link：https://www.youtube.com/watch?v=5Km3utixwZs
 class Solution1:
     """这样计算的效果类似于10000001 忽略了所有的0
