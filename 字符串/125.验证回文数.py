@@ -28,8 +28,14 @@ class Solution2:
             l += 1
             r -= 1
         return True
-
 # 运用正则表达式
+
+"""
+sub函数：
+    re.sub(pattern, repl, string, count=0, flags=0)
+正则：
+    [^a-zA-Z0-9]中的^表示否定，a-z、A-Z、0-9分别表示小写字母、大写字母和数字
+"""
 import re
 
 class Solution3:
