@@ -12,3 +12,30 @@ class Solution1:
                 return Sum
             return dfs(node.left, Sum) + dfs(node.right, Sum)
         return dfs(root, 0)
+
+    class Solution:
+        def sumNumbers(self, root: Optional[TreeNode]) -> int:
+            res = []
+
+            def dfs(root, num):
+                if not root.left and not root.right:
+                    res.append(int(num + str(root.val)))
+                    return
+                if root.left: dfs(root.left, num + str(root.val))
+                if root.right: dfs(root.right, num + str(root.val))
+
+            dfs(root, "")
+            return sum(res)
+
+# 使用字符串传递
+class Solution:
+    def sumNumbers(self, root: Optional[TreeNode]) -> int:
+        res = []
+        def dfs(root, num):
+            if not root.left and not root.right:
+                res.append(int(num + str(root.val)))
+                return
+            if root.left: dfs(root.left, num + str(root.val))
+            if root.right: dfs(root.right, num + str(root.val))
+        dfs(root, "")
+        return sum(res)
