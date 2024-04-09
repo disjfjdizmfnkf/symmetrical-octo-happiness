@@ -28,7 +28,7 @@ class Solution1:
             return sum(res)
 
 # 使用字符串传递
-class Solution:
+class Solution2:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
         res = []
         def dfs(root, num):
@@ -37,5 +37,18 @@ class Solution:
                 return
             if root.left: dfs(root.left, num + str(root.val))
             if root.right: dfs(root.right, num + str(root.val))
+        dfs(root, "")
+        return sum(res)
+
+# 对于这道题的特解(传递数字)
+class Solution3:
+    def sumNumbers(self, root: Optional[TreeNode]) -> int:
+        res = []
+        def dfs(root, num):
+            if not root.left and not root.right:
+                res.append(num*10 + root.val)
+                return
+            if root.left: dfs(root.left, num*10 + root.val)
+            if root.right: dfs(root.right, num*10 + root.val)
         dfs(root, "")
         return sum(res)
