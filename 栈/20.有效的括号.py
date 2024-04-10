@@ -5,12 +5,11 @@ class Solution1:
     def isValid(self, s: str) -> bool:
         dict = {'(':')','[':']','{':'}'}
         stack = []
-        i = 0
-        while i < len(s):
-            if s[i] in dict:
-                stack.append(s[i])
+        for c in s:
+            if c in dict:
+                # 左括号肯定先于右括号出现
+                stack.append(c)
             else:
-                if not stack or dict[stack.pop()] != s[i]:
+                if not stack or dict[stack.pop()] != c:
                     return False
-            i += 1
         return len(stack) == 0
