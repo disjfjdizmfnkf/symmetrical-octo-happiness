@@ -1,21 +1,22 @@
+from collections import deque
 
 
-# 就是层序遍历
-class Solution1:
+class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         if not root:
             return []
-        queue = [root]
+        queue = deque()
+        queue.append(root)
         res = []
         while queue:
-            level = []
-            level_leng = len(queue)
-            for _ in range(level_leng):
-                temp = queue.pop(0)
-                level.append(temp.val)
-                if temp.left:
-                    queue.append(temp.left)
-                if temp.right:
-                    queue.append(temp.right)
-            res.append(level)
+            layer = []
+            layer_len = len(queue)
+            for _ in range(layer_len):  # 层序遍历
+                cur = queue.popleft()
+                layer.append(cur.val)
+                if cur.left:
+                    queue.append(cur.left)
+                if cur.right:
+                    queue.append(cur.right)
+            res.append(layer)
         return res
