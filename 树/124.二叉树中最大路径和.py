@@ -13,15 +13,17 @@ class Solution:
     """
 # DFS
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
-        maxSum = [float('-inf')]
+        """"l_max 和 r_max 是没有左子树分支的最大值，并且一开始就要与0比较，不能在res[0]中比较，那样就算res[0]对了,
+        l_max 和 r_max 也还是错的"""
+        res = [float('-inf')]
 
-        def helper(node):  # why use helper function?   to return res
-            if not node:  # 辅助函数的作用是返回以当前节点为根节点的最大路径，并且更新全局变量
+        def dfs(node):
+            if not node:
                 return 0
-            leftMax = max(helper(node.left), 0)
-            rightMax = max(helper(node.right), 0)
-            maxSum[0] = max(maxSum[0], leftMax + rightMax + node.val)
-            return max(leftMax, rightMax) + node.val  # 只能选一个方向
+            l_max = max(dfs(node.left), 0)
+            r_max = max(dfs(node.right), 0)
+            res[0] = max(res[0], l_max + r_max + node.val)
+            return node.val + max(l_max, r_max)
 
-        helper(root)
-        return maxSum[0]
+        dfs(root)
+        return res[0]
