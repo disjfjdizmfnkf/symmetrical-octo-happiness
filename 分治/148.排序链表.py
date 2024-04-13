@@ -40,3 +40,39 @@ class Solution:
         if right:  # 不使用else因为left right 可以同时为0
             tail.next = right
         return dummy.next
+
+
+# class Solution:
+#     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+#         if not head or not head.next:
+#             return head
+#         mid = self.get_mid(head)
+#         l, r = head, mid.next
+#         mid.next = None
+#
+#         left = self.sortList(l)
+#         right = self.sortList(r)
+#
+#         return self.merge(left, right)
+#
+#     def get_mid(self, head):
+#         slow, fast = head, head.next
+#         while fast and fast.next:
+#             slow = slow.next
+#             fast = fast.next.next
+#         return slow
+#
+#     def merge(self, head1, head2):
+#         dummy = tail = ListNode()
+#         while head1 and head2:
+#             if head1.val < head2.val:
+#                 tail.next = head1
+#                 head1 = head1.next
+#             else:
+#                 tail.next = head2
+#                 head2 = head2.next
+#             tail = tail.next
+#
+#         tail.next = head1 if head1 else head2
+#
+#         return dummy.next
