@@ -1,5 +1,5 @@
 
-# dfs 深度优先搜索 左右子树向下递归  内存占用高
+# dfs 深度优先搜索 左右子树向下递归  函数的路径参数在传递时都会重新生成新的对象内存占用高
 class Solution1:
     def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
         res = []
