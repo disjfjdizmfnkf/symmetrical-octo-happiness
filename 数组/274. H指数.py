@@ -1,13 +1,14 @@
+# H指数是指： 至少 有 h 篇论文被引用次数大于等于 h
+# 这里要求的就是 h
+
 # 排序
 class Solution1:
-    def hIndex(self, citations: List[int]) -> int:
-
-        citations.sort(reverse = True)
-
-        i, h = 0, 0
-        while i < len(citations) and citations[i] > h:
-            i += 1
-            h += 1
+    def hIndex(self, citations: List[int]) -> int:  # 从最大的开始找h数，从前往后引用次数在减少， h指数(满足条件的论文数)在增加
+        citations.sort(reverse=True)
+        h = 0
+        for item in citations:
+            if item > h:
+                h += 1
         return h
 
 # 计数排序
