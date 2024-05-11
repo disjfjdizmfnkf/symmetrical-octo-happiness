@@ -2,6 +2,7 @@
 # 这里要求的就是 h
 
 # 排序
+# 方法一: h有多种不同可能的值 最优解是h可能的最大值 可知至少有两个关键变量，变化趋势相反
 class Solution1:
     def hIndex(self, citations: List[int]) -> int:  # 从最大的开始找h数，从前往后引用次数在减少， h指数(满足条件的论文数)在增加
         citations.sort(reverse=True)
