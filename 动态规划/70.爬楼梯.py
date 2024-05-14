@@ -11,6 +11,16 @@ class Solution1:
             return memo[n]
         return helper(n)
 
+#  简单写法
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        #  f(-1) + f(0)  = f(1)  递推公式;  运用到一个实际问题中理解(第一层有几种走法，因为选择从1开始)； 从一开始推到n
+        f, s, res = 0, 0, 1
+        for i in range(n):  # res从1开始的，到第n层的方法和
+            f, s = s, res
+            res = f + s
+        return res
+
 # 动态规划 aka 自底向上
 class Solution2:
     def climbStairs(self, n: int) -> int:
