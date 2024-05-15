@@ -1,30 +1,33 @@
+from random import choice
+
+# hashMap 帮助你在常数时间内获取某种关系
 
 # hash表+数组
 class RandomizedSet:
 
     def __init__(self):
-        self.Map = {}  # 存储bucket中的数和它的下标
-        self.bucket = []
+        self._map = {}
+        self._set = []
 
     def insert(self, val: int) -> bool:
-        if val not in self.Map:
-            self.bucket.append(val)
-            self.Map[val] = len(self.bucket) - 1
+        if val not in self._map:
+            self._set.append(val)  # 不要搞错顺序
+            self._map[val] = len(self._set) - 1
             return True
         return False
 
-    def remove(self, val: int) -> bool:  # 用最后一个元素覆盖要删除的数，再把最后一个删了
-        if val in self.Map:
-            r_index = self.Map[val]
-            self.bucket[r_index] = self.bucket[-1]
-            self.Map[self.bucket[r_index]] = r_index
-            self.bucket.pop()
-            del self.Map[val]
+    def remove(self, val: int) -> bool:
+        if val in self._map:
+            remove_index = self._map[val]
+            self._set[remove_index] = self._set[-1]
+            self._map[self._set[remove_index]] = remove_index
+            self._set.pop()
+            del self._map[val]  # 清除字典中的val
             return True
         return False
 
     def getRandom(self) -> int:
-        return choice(self.bucket)  # 随机获取元素
+        return choice(self._set)
 
 # Your RandomizedSet object will be instantiated and called as such:
 # obj = RandomizedSet()
