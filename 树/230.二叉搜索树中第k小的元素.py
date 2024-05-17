@@ -2,16 +2,16 @@
 # 迭代
 class Solution1:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        stack = []
+        stack = []  # 借助栈实现回溯
         while True:
-            while root: # 一直向左走
+            while root:  # 找当前最小的(当前节点的所有左边的节点)
                 stack.append(root)
                 root = root.left
-            root = stack.pop() # 走到头了，出栈
+            root = stack.pop()  # 回溯(已经到最左边或者右边的节点为空)
             k -= 1
-            if k == 0:
+            if not k:
                 return root.val
-            root = root.right # 向右走一步
+            root = root.right
 
 
 # 递归 + 剪枝
