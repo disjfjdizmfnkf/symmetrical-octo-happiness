@@ -5,13 +5,14 @@
 # 动态规划 时间复杂度O(n)  空间复杂度O(1)
 class Solution1:
     def maxSubArray(self, nums: List[int]) -> int:
-        best = nums[0]           # 数组中有负数，best不一定为0
-        now = 0
+        best, sum_ = nums[0], 0           # 数组中有负数，best不一定为0
         for i in nums:
-            if now < 0:  # 当前和为负数，一定不包含在之后的最大连续数组内
-                now = 0
-            now += i
-            best = max(best, now) # 更快的写法: if best < now : best = now
+            if sum_ < 0:
+                sum_ = 0
+            sum_ += i
+            # if now < 0:  写在这个位置会修改掉原始结果
+            #     now = 0
+            best = max(best, sum_) # 更快的写法: if best < now : best = now
         return best
 
 
