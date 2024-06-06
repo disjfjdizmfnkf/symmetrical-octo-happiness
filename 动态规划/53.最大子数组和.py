@@ -1,19 +1,30 @@
 
-# 把这个当作贪心问题更好理解， 如果看作是动态规划，那么就是一个一维的动态规划，
-# 那么问题就是以d[i]结尾的的最大子序和
 
-# 动态规划 时间复杂度O(n)  空间复杂度O(1)
+# 方法一: 寻找所有可能的连续子区间
 class Solution1:
     def maxSubArray(self, nums: List[int]) -> int:
-        best, sum_ = nums[0], 0           # 数组中有负数，best不一定为0
-        for i in nums:
-            if sum_ < 0:
-                sum_ = 0
-            sum_ += i
-            # if now < 0:  写在这个位置会修改掉原始结果
-            #     now = 0
-            best = max(best, sum_) # 更快的写法: if best < now : best = now
+        best, subSum = nums[0], 0           # 数组中有负数，best不一定为0
+        for i in nums:  # 寻找所有区间, 更新最优区间
+            if subSum < 0:
+                subSum = 0
+            subSum += i
+            best = max(best, subSum) # 更快的写法: if best < now : best = now
         return best
+
+
+
+# 方法二: 前缀和数组求区间  连续子数组 -> 区间 -> 利用前缀和数组
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        n = len(nums)
+        for i in range(1, n): nums[i] += nums[i - 1]  # 前缀和数组
+        print(nums)
+        pre_min, ans = 0, nums[0]
+        for i in nums:
+            ans = max(ans, i - pre_min)
+            pre_min = min(pre_min, i)
+        return ans
+
 
 
 
