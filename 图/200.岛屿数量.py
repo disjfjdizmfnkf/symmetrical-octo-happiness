@@ -1,4 +1,4 @@
-from typing import List
+      from typing import List
 """
 给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。
 岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。
@@ -56,25 +56,24 @@ class Solution2:
 
 # bfs递归 使用#标记已经访问的点而不是存储结构，节省内存
 class Solution3:
+    # 法一： bfs，标记经过的岛屿为其它符号(不是岛的标识)
     def numIslands(self, grid: List[List[str]]) -> int:
         if not grid:
             return 0
-
-        lands = 0
+        res = 0
         for r in range(len(grid)):
             for c in range(len(grid[0])):
-                if grid[r][c] == '1':
-                    self.dfs(grid, r, c)
-                    lands += 1
-        return lands
+                if grid[r][c] == '1':  # 新的岛屿
+                    res += 1
+                    self.bfs(grid, r, c)
+        return res
 
-    def dfs(self, grid, row, col):
-        if (row < 0 or col < 0 or row >= len(grid)
-                or col >= len(grid[0]) or grid[row][col] != '1'):
+    def bfs(self, grid, row, col):
+        if (row < 0 or col < 0 or row >= len(grid) or
+                col >= len(grid[0]) or grid[row][col] != '1'):  # base case
             return
-
-        grid[row][col] = '#'
-        self.dfs(grid, row + 1, col)
-        self.dfs(grid, row, col + 1)
-        self.dfs(grid, row - 1, col)
-        self.dfs(grid, row, col - 1)
+        grid[row][col] = '0'
+        self.bfs(grid, row + 1, col)
+        self.bfs(grid, row, col + 1)
+        self.bfs(grid, row - 1, col)
+        self.bfs(grid, row, col - 1)
