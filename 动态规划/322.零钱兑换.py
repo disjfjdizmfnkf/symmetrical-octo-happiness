@@ -1,25 +1,33 @@
-# 阶段性总结一下动态规划
-# 我遇见的要么是自下而上求解到原始问题，要么是自上而下求解到原始问题
-# 例如爬楼梯，自下而上求解到原始问题 这道题也是自下而上求解原始问题
-# 自上而下求解原始问题的话，就是从原始问题开始，逐步求解到子问题
-# 例如斐波那契数列
-
-
 # 自下而上的动态规划dp
+from typing import List
+
+
 class Solution:
-    def coinChange(self, coins: List[int], amount: int) -> int:
-        L = [amount + 1] * (amount + 1)
-        L[0] = 0 # 0元需要0个硬币
-        for i in range(1, amount + 1): # 注意范围
+    def coinChange0(self, coins: List[int], amount: int) -> int:
+        dp = [-1] * (amount + 1)
+        dp[0] = 0
+        for i in range(1, amount + 1):
             for coin in coins:
-                if i - coin >= 0: # find sub_problem
+                if i < coin:
+                    continue
+                if dp[i - coin] == -1:
+                    continue
+                # dp[i]: 当前不使用该coin时的最小硬币数 dp[i-coin]+1:使用当前coin后的最小硬币数
+                if dp[i] == -1 or dp[i] > dp[i - coin] + 1:
+                    dp[i] = dp[i - coin] + 1
+        return dp[-1]
+
+    def coinChange1(self, coins: List[int], amount: int) -> int:
+        L = [amount + 1] * (amount + 1)
+        L[0] = 0  # 0元需要0个硬币
+        for i in range(1, amount + 1):  # 注意范围
+            for coin in coins:
+                if i - coin >= 0:  # find sub_problem
                     L[i] = min(1 + L[i - coin], L[i])  # 在子问题中挑选最优解
         return L[amount] if L[amount] != amount + 1 else -1
-    # dp[amount] 为默认值 amount + 1 最大
 
-# 更加好懂的方法
-class Solution2:
-    def coinChange(self, coins: List[int], amount: int) -> int:
+    # dp[amount] 为默认值 amount + 1 最大
+    def coinChange2(self, coins: List[int], amount: int) -> int:
         L = [amount + 1] * (amount + 1)
         L[0] = 0  # 0元需要0个硬币
         for i in range(1, amount + 1):
@@ -48,7 +56,7 @@ class Solution2:
 
 # 对于负数也有考虑，如果 amount - coin < 0，则通过右移的规则，最后一位为 0
 # 而不为 1，因此直接排除了这种可能
-class Solution:
+class Solution1:
     def coinChange(self, coins: List[int], amount: int) -> int:
         if not amount: return 0
         dp = 1 << amount
