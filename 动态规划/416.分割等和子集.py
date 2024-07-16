@@ -24,7 +24,7 @@ class Solution:
         dp[0], accumulate = 1, 0
         for x in nums:
             accumulate += x
-            for j in range(accumulate, x - 1, -1):
+            for j in range(accumulate, x - 1, -1):  # 从前往后，在更新j位置时要保证j-x位置的值还是之前的值
                 dp[j] |= dp[j - x]
         return bool(dp[total//2])
 
