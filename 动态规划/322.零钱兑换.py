@@ -4,6 +4,7 @@ from typing import List
 
 class Solution:
     def coinChange0(self, coins: List[int], amount: int) -> int:
+        # dp[i]总金额为i时所需要的最少硬币数
         dp = [-1] * (amount + 1)
         dp[0] = 0
         for i in range(1, amount + 1):
@@ -12,7 +13,7 @@ class Solution:
                     continue
                 if dp[i - coin] == -1:
                     continue
-                # dp[i]: 当前不使用该coin时的最小硬币数 dp[i-coin]+1:使用当前coin后的最小硬币数
+                # dp[i]: 当前不使用该coin时的最小硬币数 dp[i-coin] + 1:使用当前coin后的最小硬币数
                 if dp[i] == -1 or dp[i] > dp[i - coin] + 1:
                     dp[i] = dp[i - coin] + 1
         return dp[-1]
