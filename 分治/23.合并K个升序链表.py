@@ -1,18 +1,14 @@
 class Solution:
+    # approach1: heap
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        if not lists:
-            return None
+        if not any(lists):  # any(array) 当数组中有一个值为True时返回True
+            return
 
-        # 使用最小堆来合并 k 个有序链表
-        import heapq
-        heap = []
-        for i, l in enumerate(lists):
-            if l:
-                heapq.heappush(heap, (l.val, i, l))
+        heap = [(l.val, i, l) for i, l in enumerate(lists) if l]  # 将所有非空列表的 值,列表索引,列表头节点 加入heap
+        heapq.heapify(heap)
 
-        dummy = ListNode(0)
-        curr = dummy
-        while heap:
+        dummy = curr = ListNode(0)  # 新建一个dummy Node和一个指针
+        while heap:  # 在最后两次遍历之前， heap中项目的个数都为k个？ 就像heap在过滤k条链表
             _, i, node = heapq.heappop(heap)
             curr.next = node
             curr = curr.next
