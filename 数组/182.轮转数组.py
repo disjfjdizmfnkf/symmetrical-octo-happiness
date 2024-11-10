@@ -24,7 +24,7 @@ class Solution2:
     def rotate(self, nums: List[int], k: int) -> None:
         n = len(nums)
         k %= n
-        nums[:] = nums[-k:] + nums[:-k]  # nums[:]  在原地修改数组
+        nums[:] = nums[-k:] + nums[:-k]
         # 如果是nums = nums[-k:] + nums[:-k] 则不是原地修改数组，这样原来的nums的对象被回收，指向现在新的对象
 
 

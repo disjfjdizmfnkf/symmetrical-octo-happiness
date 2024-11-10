@@ -18,7 +18,7 @@ class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         n = len(nums)
         for i in range(1, n): nums[i] += nums[i - 1]  # 前缀和数组
-        print(nums)
+        # 如果将pre_min初始化为nums[0]会导致第一个位置的最大前缀和永远计算为0
         pre_min, ans = 0, nums[0]
         for i in nums:
             ans = max(ans, i - pre_min)

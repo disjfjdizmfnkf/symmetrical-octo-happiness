@@ -1,14 +1,14 @@
 class Solution1:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        memo = {}
-        res = 0
-        left = 0
-        for right in range(len(s)):
-            if s[right] in memo:
-                left = max(memo[s[right]] + 1, left)
-            memo[s[right]] = right
-            res = max(res, right - left + 1)
-        return res
+        # 滑动窗口: 移动一个端点，在O(1)时间内保持窗口有效并且快速确定另一个端点
+        hashMap = {}
+        ans = l = r = 0
+        for r in range(len(s)):
+            if s[r] in hashMap:  # keep left is valid
+                l = max(l, hashMap[s[r]] + 1)  # 这里使用max确保左边界不回退
+            ans = max(ans, r - l + 1)
+            hashMap[s[r]] = r
+        return ans
 
 class Solution2:
     def lengthOfLongestSubstring(self, s: str) -> int:

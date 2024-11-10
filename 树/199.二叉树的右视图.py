@@ -1,23 +1,24 @@
 
-# 借助queue 按层遍历
+# 层序遍历，每层的最后一个就是最右边看到的
 class Solution1:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+            
         res = []
-        queue = []
-        if root:   # 考虑一开始root为空的情况
-            queue.append(root)
-        while queue:
-            layerLen = len(queue)
-            for i in range(layerLen):
-                cur = queue.pop(0)
-                if i == layerLen - 1:
-                    res.append(cur.val)
-                if cur.left:
-                    queue.append(cur.left)
-                if cur.right:
-                    queue.append(cur.right)
+        que = deque()
+        que.append(root)
+        while que:
+            n = len(que)
+            res.append(que[n - 1].val)
+            for _ in range(n):
+                cur = que.popleft()
+                l, r = cur.left, cur.right
+                if l: que.append(l)
+                if r: que.append(r)
         return res
 
+# 别样的层序遍历
 class Solution3:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         res = []

@@ -1,6 +1,6 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
-        # 想法一： 两个方向各来一遍，左边界低于或等于与有边界的水池水 加上 右边界低于于左边界的水池水
+        # 想法一： 两个方向各来一遍，左边界低于或等于与右边界的水池水 加上 右边界低于于左边界的水池水
         def water_count(left, right):
             if abs(left - right) == 1:
                 return 0

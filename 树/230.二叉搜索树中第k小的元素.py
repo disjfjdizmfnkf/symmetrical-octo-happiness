@@ -1,3 +1,15 @@
+# 先序遍历
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        sortArray = [] 
+        def preorder(root):
+            if not root or len(sortArray) >= k:
+                return 
+            preorder(root.left)
+            sortArray.append(root.val)
+            preorder(root.right)
+        preorder(root)
+        return sortArray[k - 1]
 
 # 迭代
 class Solution1:

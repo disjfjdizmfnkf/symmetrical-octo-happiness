@@ -12,9 +12,7 @@ class Solution:
             return
         mid_index = len(nums)//2
         root = nums[mid_index]
-        # left_part = nums[:mid_index]
-        # right_part = nums[mid_index + 1:]
-        left_tree = self.sortedArrayToBST(nums[:mid_index])
-        right_tree = self.sortedArrayToBST(nums[mid_index + 1:])
-        node = TreeNode(root, left_tree, right_tree)
+        left_node = self.sortedArrayToBST(nums[:mid_index])
+        right_node = self.sortedArrayToBST(nums[mid_index + 1:])
+        node = TreeNode(root, left_node, right_node)
         return node

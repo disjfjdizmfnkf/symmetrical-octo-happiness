@@ -14,3 +14,4 @@ class Solution:
                 # 如果没有重叠，将当前区间添加到合并后的区间列表
                 merged.append(interval)
         return merged
+

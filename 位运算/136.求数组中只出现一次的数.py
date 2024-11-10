@@ -13,7 +13,7 @@ class Solution:
 
 
 
-# ^ 异或运算，相同为0不同为1：
+# ^ 异或运算，相同为0不同为1, 满足交换律
 class Solution2:
     def singleNumber(self, nums: List[int]) -> int:
         ans = 0
