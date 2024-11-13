@@ -1,17 +1,27 @@
-"""
-给你二叉树的根结点 root ，请你将它展开为一个单链表：
 
-展开后的单链表应该同样使用 TreeNode ，其中 right 子指针指向链表中下一个结点，而左子指针始终为 null 。
-展开后的单链表应该与二叉树 先序遍历 顺序相同。
-"""
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        pre = [None]  # 使用列表，在下面函数内修改值不会改变其引用，如果是变量就会修改引用
+        def flatten_helper(root):
+            if not root:
+                return
+
+            flatten_helper(root.right)
+            flatten_helper(root.left)
+
+            root.right = pre[0]
+            root.left = None
+            pre[0] = root
+
+        flatten_helper(root)
 
 
-#  是在原来的树上修改
-
-# 递归  因为链表展开的顺序是先序遍历的顺序，所以想最后一个节点，我们把他接到前一个节点的右子树上，
-# 然后再把前一个节点接到当前节点的右子树上，递归的这样做，最后就能得到一个展开的链表
-class Solution1:  # 将先序遍历的子节点变为右子节点
+class Solution2:  # 将先序遍历的子节点变为右子节点
     def __init__(self):
+        # 保存上一个处理的节点
         self.prev = None
 
     def flatten(self, root: Optional[TreeNode]) -> None:
@@ -21,10 +31,14 @@ class Solution1:  # 将先序遍历的子节点变为右子节点
         if not root:
             return
 
-        # 先向右再向左，因为加节点是从后往前加的
+        # 先递归的展开右子树，再展开左子树，
+        # 这样做保证处理当前节点时右子树已经被展开了
         self.flatten(root.right)
         self.flatten(root.left)
 
+        # 当前节点的右子树就是之前已经展开的
         root.right = self.prev
         root.left = None
+
+        # 在下次递归调用中使用这次的root作为prev
         self.prev = root

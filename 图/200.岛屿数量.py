@@ -54,26 +54,29 @@ class Solution2:
                     lands += 1
         return lands
 
-# bfs递归 使用#标记已经访问的点而不是存储结构，节省内存
+# bfs递归
 class Solution3:
-    # 法一： bfs，标记经过的岛屿为其它符号(不是岛的标识)
+    def __init__(self):
+        self.rows = None
+        self.cols = None
+
     def numIslands(self, grid: List[List[str]]) -> int:
         if not grid:
             return 0
-        res = 0
-        for r in range(len(grid)):
-            for c in range(len(grid[0])):
-                if grid[r][c] == '1':  # 新的岛屿
+        self.rows, self.cols, res = len(grid), len(grid[0]), 0
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if grid[i][j] == '1':
+                    self.bfs(grid, i, j)
                     res += 1
-                    self.bfs(grid, r, c)
         return res
 
+    # 广度优先将所有连在一起的'1'都置为'0'
     def bfs(self, grid, row, col):
-        if (row < 0 or col < 0 or row >= len(grid) or
-                col >= len(grid[0]) or grid[row][col] != '1'):  # base case
+        if row not in range(self.rows) or col not in range(self.cols) or grid[row][col] != '1':
             return
         grid[row][col] = '0'
         self.bfs(grid, row + 1, col)
-        self.bfs(grid, row, col + 1)
         self.bfs(grid, row - 1, col)
+        self.bfs(grid, row, col + 1)
         self.bfs(grid, row, col - 1)

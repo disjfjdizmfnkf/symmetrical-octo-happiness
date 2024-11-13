@@ -1,4 +1,27 @@
-class Solution:
+
+# 改进方法
+class Solution1:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        r, c = len(matrix), len(matrix[0])
+        memo = set()
+        for i in range(r):
+            for j in range(c):
+                if matrix[i][j] == 0:
+                    # 不能添加(i, 0) (0, j) 靠位置不能完全区分行和列，因为0的特殊情况
+                    memo.add((0, i))
+                    memo.add(('~', j))
+        for i in memo:
+            if not i[0]:
+                for j in range(c):
+                    matrix[i[1]][j] = 0
+            else:
+                for j in range(r):
+                    matrix[j][i[1]] = 0
+
+class Solution2:
     def setZeroes(self, matrix: List[List[int]]) -> None:
         """
         Do not return anything, modify matrix in-place instead.

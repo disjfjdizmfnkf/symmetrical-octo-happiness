@@ -10,15 +10,16 @@ class Solution:
                 return True
         return False
 
-# 哈希表
+# 利用不同节点对象的不同(不是值的不同)
+
+
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        """用节点对象当键，而不是节点对象的值，值可能会有重复但不是循环的点，而节点对象只有一个"""
-        hashMap ={}
-        curNode = head
-        while(curNode):
-            if curNode in hashMap:
+        """使用节点自身当key是独一无二的"""
+        memo = set()
+        while (head):
+            if head in memo:
                 return True
-            hashMap[curNode] = 1
-            curNode = curNode.next
+            memo.add(head)
+            head = curNode.next
         return False

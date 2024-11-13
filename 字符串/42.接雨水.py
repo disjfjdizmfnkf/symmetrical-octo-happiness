@@ -1,4 +1,30 @@
-class Solution:
+class Solution1:
+    def trap(self, height: List[int]) -> int:
+        """
+            计算所有的积水只有两种情况:
+            1. 左边界比右边界高的水坑
+            2. 右边界比左边界高的水坑
+        """
+        total = 0
+        left, right = 0, len(height) - 1
+        l_most_hight, r_most_hight = 0, 0
+        while left < right:
+            if height[left] < height[right]:  # 最右侧高，计算左边堆积
+                if height[left] > l_most_hight:
+                    l_most_hight = height[left]
+                else:
+                    total += l_most_hight - height[left]
+                left += 1
+            else:  # 最左边>=右边，计算右边堆积
+                if height[right] > r_most_hight:
+                    r_most_hight = height[right]
+                else:
+                    total += r_most_hight - height[right]
+                right -= 1
+        return total
+
+
+class Solution2:
     def trap(self, height: List[int]) -> int:
         # 想法一： 两个方向各来一遍，左边界低于或等于与右边界的水池水 加上 右边界低于于左边界的水池水
         def water_count(left, right):

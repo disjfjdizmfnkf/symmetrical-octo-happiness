@@ -10,6 +10,7 @@ class Solution1:
                 # 左括号肯定先于右括号出现
                 stack.append(c)
             else:
+                # 先判断当前栈是否为空
                 if not stack or dict[stack.pop()] != c:
                     return False
         return len(stack) == 0

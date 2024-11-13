@@ -2,6 +2,7 @@
 class Solution1:
     def climbStairs(self, n: int) -> int:
         memo = {}
+
         def helper(n):
             if n <= 2:  # n = 1 一种 n = 2 两种 以n=0为基本条件也可以
                 return n
@@ -12,24 +13,18 @@ class Solution1:
         return helper(n)
 
 #  简单写法
+
+
 class Solution:
     def climbStairs(self, n: int) -> int:
-        #  f(-1) + f(0)  = f(1)  递推公式;  运用到一个实际问题中理解(第一层有几种走法，因为选择从1开始)； 从一开始推到n
-        f, s, res = 0, 0, 1
-        for i in range(n):  # res从1开始的，到第n层的方法和
-            f, s = s, res
+        # f(n): 爬到第n层有多少种方法 f(n) = f(n-1)+1种 + f(n-2)+1种
+        f, s, res = 0, 1, 0  # 第0层: 0  第1层: 1
+        for _ in range(n):
             res = f + s
-        return res
-
-# 动态规划 aka 自底向上
-class Solution2:
-    def climbStairs(self, n: int) -> int:
-        f, s, res = 0, 0, 1   # 讨论边界情况 n = 1 时 res = 1
-        for i in range(n):    # 从0开始到n-1
             f = s
             s = res
-            res = f + s
         return res
+
 
 # 矩阵快速幂  和斐波那契数列的矩阵快速幂一样
 class Solution3:
@@ -43,7 +38,7 @@ class Solution3:
                 a = matrix_multiply(a, a)
             return ret
 
-        def matrix_multiply(a, b): # 2*2矩阵相乘
+        def matrix_multiply(a, b):  # 2*2矩阵相乘
             c = [[0, 0], [0, 0]]
             for i in range(2):
                 for j in range(2):
