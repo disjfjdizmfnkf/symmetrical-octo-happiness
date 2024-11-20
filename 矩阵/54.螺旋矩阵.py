@@ -1,5 +1,40 @@
+class Solution1:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        if not matrix:
+            return []
+        l, t, r, b = 0, 0, len(matrix[0]) - 1, len(matrix) - 1
+        res = []
+        while True:
+            # 向右遍历
+            for i in range(l, r + 1):
+                res.append(matrix[t][i])
+            t += 1
+            if t > b:
+                break
+            # 向下遍历
+            for i in range(t, b + 1):
+                res.append(matrix[i][r])
+            r -= 1
+            if l > r:
+                break
+            # 向左遍历
+            for i in range(r, l - 1, -1):
+                res.append(matrix[b][i])
+            b -= 1
+            if b < t:
+                break
+            #
+            for i in range(b, t - 1, -1):
+                res.append(matrix[i][l])
+            l += 1
+            if l > r:
+                break
+        return res
+
 # 不断从前往后遍历一个列表 使用一个额外的变量实现
-class Solution:
+
+
+class Solution2:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
         if not matrix:
             return []

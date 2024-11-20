@@ -5,12 +5,11 @@ class Solution:
     def singleNumber(self, nums: List[int]) -> int:
         hashMap = dict()
         for i in nums:
-            hashMap[i] = hashMap.get(i, 0) + 1  #get 返回值为value 默认返回值0
-        
-        for k, v in hashMap.items():    #    dict.items() 返回一个类似于列表的对象，
-            if v == 1:                  #  其中每个元素都是形如 (key, value) 的元组
-                return k                 
+            hashMap[i] = hashMap.get(i, 0) + 1  # get 返回值为value 默认返回值0
 
+        for k, v in hashMap.items():  # dict.items() 返回一个类似于列表的对象，
+            if v == 1:  # 其中每个元素都是形如 (key, value) 的元组
+                return k
 
 
 # 异或运算，相同为0不同为1：

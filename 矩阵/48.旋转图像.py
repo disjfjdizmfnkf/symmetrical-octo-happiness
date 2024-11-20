@@ -6,14 +6,13 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        # 想法一：借助队列，按照某种顺序
+        # 按照一定顺序将数字到队列中，再通过想要的顺序进行赋值
         queue = deque()
-        n = len(matrix)  # 注意作为索引时要减1
-        # range 不包含最后一个
-        for c in range(n):
-            for r in range(n - 1, -1, -1):
-                queue.append(matrix[r][c])
-        for r in range(n):
-            for c in range(n):
-                item = queue.popleft()
-                matrix[r][c] = item
+        d = len(matrix)  # 注意获取的是长度
+        for i in range(d):
+            for j in range(d):
+                queue.append(matrix[i][j])
+
+        for i in range(d - 1, -1, -1):  # range只会遍历到第二个参数的前一个数
+            for j in range(d):
+                matrix[j][i] = queue.popleft()

@@ -21,13 +21,14 @@ class Solution:
 
     # rob0优化
     def rob1(self, nums: List[int]) -> int:
-        rub1, rub2 = 0, 0
-        # [rub1, rub2, n, n+1, ...]
-        for n in nums:
-            temp = max(rub1 + n, rub2)  # temp 为可偷到的最大金额 rub1 + n 为偷当前房子，rub2 为不偷当前房子 只有这两种情况
-            rub1 = rub2
-            rub2 = temp
-        return rub2
+        r, s = 0, 0
+
+        # 从第一个开始算起
+        for i in nums:
+            res = max(i + r, s)  # 从哪里来
+            r = s
+            s = res
+        return s
 
 
 # 递归

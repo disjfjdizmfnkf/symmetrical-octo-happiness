@@ -1,3 +1,5 @@
+
+# (val, now_min_val) 使用元组第二个位置存储现在状态的栈中的最小值
 class MinStack(object):
 
     def __init__(self):
@@ -5,7 +7,6 @@ class MinStack(object):
         self.stack = []
 
     def push(self, x):
-        # 用一个元组就不用再创建一个列表了
         if not self.stack:
             self.stack.append((x, x))
         else:

@@ -3,7 +3,26 @@ from typing import List
 
 
 class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        # 从哪里来: 当前金额的最少硬币数是由之前金额的最少硬币数 + 一枚硬币得到的
+        dp = [amount + 1] * (amount + 1)  # 金额是从0开始
+        dp[0] = 0
+        for i in range(amount + 1):
+            for v in coins:
+                if i >= v:
+                    dp[i] = min(dp[i - v] + 1, dp[i])
+        return dp[-1] if dp[-1] != amount + 1 else -1  # 无法兑换的还会是初始值
+
     def coinChange0(self, coins: List[int], amount: int) -> int:
+        L = [amount + 1] * (amount + 1)
+        L[0] = 0  # 0元需要0个硬币
+        for i in range(1, amount + 1):  # 注意范围
+            for coin in coins:
+                if i - coin >= 0:  # find sub_problem
+                    L[i] = min(1 + L[i - coin], L[i])  # 在子问题中挑选最优解
+        return L[amount] if L[amount] != amount + 1 else -1
+
+    def coinChange1(self, coins: List[int], amount: int) -> int:
         # dp[i]总金额为i时所需要的最少硬币数
         dp = [-1] * (amount + 1)
         dp[0] = 0
@@ -18,21 +37,13 @@ class Solution:
                     dp[i] = dp[i - coin] + 1
         return dp[-1]
 
-    def coinChange1(self, coins: List[int], amount: int) -> int:
-        L = [amount + 1] * (amount + 1)
-        L[0] = 0  # 0元需要0个硬币
-        for i in range(1, amount + 1):  # 注意范围
-            for coin in coins:
-                if i - coin >= 0:  # find sub_problem
-                    L[i] = min(1 + L[i - coin], L[i])  # 在子问题中挑选最优解
-        return L[amount] if L[amount] != amount + 1 else -1
-
     # dp[amount] 为默认值 amount + 1 最大
     def coinChange2(self, coins: List[int], amount: int) -> int:
         L = [amount + 1] * (amount + 1)
         L[0] = 0  # 0元需要0个硬币
         for i in range(1, amount + 1):
-            sub_problem = [L[i - k] for k in coins if i - k >= 0 and L[i - k] != amount + 1]  # 找到所有有效的子问题
+            sub_problem = [L[i - k] for k in coins if i - k >=
+                           0 and L[i - k] != amount + 1]  # 找到所有有效的子问题
             if sub_problem:
                 L[i] = min(sub_problem) + 1
         return -1 if L[amount] == amount + 1 else L[amount]
@@ -59,12 +70,14 @@ class Solution:
 # 而不为 1，因此直接排除了这种可能
 class Solution1:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        if not amount: return 0
+        if not amount:
+            return 0
         dp = 1 << amount
         for i in range(amount // min(coins)):
             tmp = 0
             for c in coins:
                 tmp |= dp >> c
-                if tmp & 1: return i + 1
+                if tmp & 1:
+                    return i + 1
             dp = tmp
         return -1
