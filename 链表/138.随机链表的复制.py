@@ -1,37 +1,31 @@
+# Definition for a Node.
 class Node:
     def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
         self.val = int(x)
         self.next = next
         self.random = random
 
-# 使用hashMap存储原节点到新节点的映射
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
         if not head:
-            return None
+            return 
+        # key: 旧节点对象  val: 新节点对象
+        mapOldToNew = {}
+        cur = head
 
-        old_to_new = {}
-        current = head
+        # 遍历旧链表，将旧链表中的节点使用哈希表保存起来
+        while cur:
+            mapOldToNew[cur] = Node(cur.val)
+            cur = cur.next
 
-        # First pass: create all new nodes and store the mapping from old nodes to new nodes
-        while current:
-            old_to_new[current] = Node(current.val)
-            current = current.next
-
-        current = head
-
-        # Second pass: assign next and random pointers to the new nodes
-        while current:
-
-            # if current.next:
-            #     old_to_new[current].next = old_to_new[current.next]
-            # if current.random:
-            #     old_to_new[current].random = old_to_new[current.random]
-
-            # 使用get()方法不用判空
-            old_to_new[current].next = old_to_new.get(current.next)  # 运用原节点寻找相同的新节点
-            old_to_new[current].random = old_to_new.get(current.random)
-
-            current = current.next
-
-        return old_to_new[head]
+        cur = head
+        # 再次遍历旧链表，修改新节点的next和random
+        while cur:
+            # 错误示例，这是将新节点连接到了旧节点
+            # mapOldToNew[cur].next = cur.next
+            # mapOldToNew[cur].random = cur.random
+            # 另外使用get防止遇到null节点报错
+            mapOldToNew[cur].next = mapOldToNew.get(cur.next)
+            mapOldToNew[cur].random = mapOldToNew.get(cur.random)
+            cur = cur.next
+        return mapOldToNew[head]

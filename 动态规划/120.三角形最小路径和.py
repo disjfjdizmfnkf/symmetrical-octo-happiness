@@ -14,13 +14,6 @@ class Solution:
                 dp[ind][j] = min(dp[next_ind][j], dp[next_ind][j + 1]) + triangle[i][j]
         return dp[0][0]  # 三角形顶部 滚动索引0%2 = 0
 
-
-
-
-
-
-
-
 class Solution1:
     def minimumTotal(self, triangle: List[List[int]]) -> int:
         L = [0] * (len(triangle) + 1)
