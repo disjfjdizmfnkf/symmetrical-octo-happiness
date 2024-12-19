@@ -5,6 +5,7 @@ class Solution2:
     def canJump(self, nums: List[int]) -> bool:
         n = len(nums)
         dis = nums[0]
+        # 计算最远跳跃距离
         for i in range(n):
             if i <= dis:
                 dis = max(dis, i + nums[i])

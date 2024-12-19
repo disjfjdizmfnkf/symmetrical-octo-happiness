@@ -10,13 +10,14 @@ class Solution1:
         l_most_hight, r_most_hight = 0, 0
         while left < right:
             if height[left] < height[right]:  # 最右侧高，计算左边堆积
-                if height[left] > l_most_hight:
+                if l_most_hight < height[left]:
                     l_most_hight = height[left]
-                else:
+                else:  # 高度降低 && 最右侧比左侧高 -> 必定有积水
                     total += l_most_hight - height[left]
+                # 移动边界重新判断，确保判断是否有水的方法是有效的
                 left += 1
             else:  # 最左边>=右边，计算右边堆积
-                if height[right] > r_most_hight:
+                if r_most_hight < height[right]:
                     r_most_hight = height[right]
                 else:
                     total += r_most_hight - height[right]
@@ -25,9 +26,7 @@ class Solution1:
 
 
 class Solution2:
-    def trap(self, height: List[int]) -> int:
-        # 想法一： 两个方向各来一遍，左边界低于或等于与右边界的水池水 加上 右边界低于于左边界的水池水
-        def water_count(left, right):
+    def water_count(self, left, right):
             if abs(left - right) == 1:
                 return 0
             total = 0
@@ -35,21 +34,25 @@ class Solution2:
             for i in range(left + 1, right):
                 total += (h - height[i])
             return total
+    
+    def trap(self, height: List[int]) -> int:
+        # 想法一： 两个方向各来一遍，左边界低于或等于与右边界的水池水 加上 右边界低于于左边界的水池水
 
         total = 0
 
         l, r = 0, 0
         while r < len(height):
             if height[r] >= height[l]:
-                total += water_count(l, r)
+                total += self.water_count(l, r)
                 l = r
             r += 1
 
         height = height[::-1]
+
         l, r = 0, 0
         while r < len(height):
             if height[r] > height[l]:
-                total += water_count(l, r)
+                total += self.water_count(l, r)
                 l = r
             r -= 1
         return total

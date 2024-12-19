@@ -2,14 +2,20 @@ class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         if not digits:
             return []
-        phone = {"2": "abc", "3": "def", "4": "ghi", "5": "jkl",
-                 "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"}
+
+        #  num -> chars    index -> chars    使用数组比字典高效
+        mapping = ['', '', 'abc', 'def', 'ghi',
+                   'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
         res = []
-        def backTrack(combination, remain_digits):
-            if not remain_digits:
+
+        def backTrack(combination, remainDigits):
+            if not remainDigits:
                 res.append(combination)
                 return
-            for i in phone[remain_digits[0]]:  # 实际上就是遍历字符串
-                backTrack(combination + i, remain_digits[1:])  # 上次组合的每个字符字符再和后面的数字的每个字符组合
-        backTrack("", digits)
+            # remainDigits是字符串，作为索引时需要转换为数字
+            currentDigit = int(remainDigits[0])
+            for char in mapping[currentDigit]:
+                backTrack(combination + char, remainDigits[1:])
+
+        backTrack('', digits)
         return res

@@ -26,8 +26,8 @@ class LRUCache:
     def get(self, key: int) -> int:
         if key in self.cache:
             node = self.cache[key]
-            self.remove(node)
-            self.append(node)
+            self.remove(node)  # 移除节点
+            self.append(node)  # 添加到最后
             return node.value
         return -1
 

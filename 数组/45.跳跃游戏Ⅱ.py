@@ -1,7 +1,8 @@
 
-#DFS
+# DFS
 class Solution1:
     """我觉得像一种横向的深度优先搜素"""
+
     def jump(self, nums: List[int]) -> int:
         jumpCount = 0
         l, r = 0, 0
@@ -16,11 +17,14 @@ class Solution1:
 
 # 贪心
 class Solution2:
+    # 在每个阶段中只跳跃最远的距离
     def jump(self, nums: List[int]) -> int:
-        curEnd, curFarthest, jumpCount = 0, 0, 0
-        for i in range(len(nums) - 1):  # 减一避免当最后一个是curend之后还加1
-            curFarthest = max(curFarthest, i + nums[i])
-            if i == curEnd:  # it's time to jump
-                jumpCount += 1
-                curEnd = curFarthest
-        return jumpCount
+        n = len(nums)
+        jumpBorder, farthest, state = 0, 0, 0
+        for i in range(n - 1):  # 不包含最后一个的索引
+            # 寻找最大距离
+            farthest = max(i + nums[i], farthest)
+            if i == jumpBorder:  # 到达当前可达距离的边界
+                state += 1
+                jumpBorder = farthest
+        return state
