@@ -4,24 +4,21 @@ class Solution1:
         hashMap = {}
         ans = l = r = 0
         for r in range(len(s)):
-            if s[r] in hashMap:  # keep left is valid
-                l = max(l, hashMap[s[r]] + 1)  # 这里使用max确保左边界不回退
+            if s[r] in hashMap:
+                l = max(l, hashMap[s[r]] + 1)  # 防止左边界回退
             ans = max(ans, r - l + 1)
             hashMap[s[r]] = r
         return ans
 
 class Solution2:
     def lengthOfLongestSubstring(self, s: str) -> int:
+        memo = set()
         res = 0
-        for l in range(len(s)):
-            memo = set()
-            sub = 0
-            for r in range(l, len(s)):
-                if s[r] not in memo:
-                    memo.add(s[r])
-                    sub += 1
-                else:
-                    break
-            res = max(res, sub)
+        for r in range(len(s)):
+            # abcdeff 如果添加到第二个f,就要依次从头删除到第一个f
+            while s[r] in memo:
+                memo.remove(s[l])
+                l += 1
+            memo.add(r)
+            res = max(res, r - l + 1)
         return res
-
