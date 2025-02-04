@@ -1,6 +1,6 @@
 class Solution1:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        # 滑动窗口: 移动一个端点，在O(1)时间内保持窗口有效并且快速确定另一个端点
+        # 滑动窗口: 移动一个端点，在O(1)时间内保持窗口有效并且快速确定另一个端点, 但是所有的数字位置都保存在了哈希表中
         hashMap = {}
         ans = l = r = 0
         for r in range(len(s)):

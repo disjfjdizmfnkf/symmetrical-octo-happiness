@@ -12,6 +12,7 @@ class Solution:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         if not root:
             return False
+        # 在叶子节点时判断
         if not root.left and not root.right:
             return targetSum - root.val == 0   #记得最后还要减去叶子节点的值
         return self.hasPathSum(root.left, targetSum - root.val) or self.hasPathSum(root.right, targetSum - root.val)

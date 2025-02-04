@@ -8,7 +8,7 @@ class Solution:
         res = []
         deq = deque()
         for l in range(len(nums)):
-            if deq and deq[0] < l - k + 1:  # 移除窗口外的数的索引
+            while deq and deq[0] < l - k + 1:  # 移除窗口外的数的索引
                 deq.popleft()
             # 实现单调队列, 维护左边的数字比右边大
             while deq and nums[deq[-1]] < nums[l]:

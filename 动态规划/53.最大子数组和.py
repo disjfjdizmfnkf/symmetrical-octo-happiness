@@ -5,7 +5,7 @@ class Solution1:
     def maxSubArray(self, nums: List[int]) -> int:
         best, subSum = nums[0], 0           # 数组中有负数，best不一定为0
         for i in nums:  # 寻找所有区间, 更新最优区间
-            if subSum < 0:
+            if subSum < 0:  # 如果前面的和小于0，那么对后面的和没有增益，直接舍弃
                 subSum = 0
             subSum += i
             best = max(best, subSum) # 更快的写法: if best < now : best = now
@@ -19,7 +19,8 @@ class Solution:
         n = len(nums)
         for i in range(1, n): nums[i] += nums[i - 1]  # 前缀和数组
         # 如果将pre_min初始化为nums[0]会导致第一个位置的最大前缀和永远计算为0
-        pre_min, ans = 0, nums[0]
+        pre_min = 0  # 刚开始最小前缀和为0
+        ans = nums[0]  # 初始化为第一个数字
         for i in nums:
             ans = max(ans, i - pre_min)
             pre_min = min(pre_min, i)

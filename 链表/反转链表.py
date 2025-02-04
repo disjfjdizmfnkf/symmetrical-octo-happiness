@@ -17,6 +17,7 @@ class Solution:
             cur.next = pre
             pre = cur
             cur = next
+        return pre
 
     # 递归
     def reverseListRecursion(self, head: Optional[ListNode]) -> Optional[ListNode]:

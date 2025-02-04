@@ -1,41 +1,44 @@
 # Definition for singly-linked list.
 class ListNode:
-    def __init__(self, val=23, next=None):
+    def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 
 
 class Solution:
-    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
-        dummy = ListNode(23, head)
+    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+        dummy = ListNode(0, head)
         groupPrev = dummy
+
         while True:
-            # 在这个循环过程中相关的变量都是之后会不断调整值的变量
             Kth = self.getKth(groupPrev, k)
             if not Kth:
                 break
-
-            # 如果之后有k个节点,反转之后的节点
-            # 反转节点时需要拿到开始节点和前一个节点
-            # 在这里因为最后一个节点不是空节点，所以还要获取下一组的第一个节点
-            cur, prev = groupPrev.next, Kth.next
             groupNext = Kth.next
-            while cur != groupNext:
-                temp = cur.next
-                cur.next = prev
-                # 将两个指针向后移动
-                prev = cur
-                cur = temp
-            # groupPrev的next重新链接，并且修改groupPrev到下一个节点的位置
-            temp = groupPrev.next
-            groupPrev.next = Kth
-            groupPrev = temp
+
+            # 反转节点并获取反转后的首尾节点
+            newHead, newTail = self.reverse(groupPrev.next, groupNext)
+            # 重新链接反转后的链表部分
+            groupPrev.next = newHead
+            newTail.next = groupNext
+            # 更新groupPrev到下一个节点的位置
+            groupPrev = newTail
+
         return dummy.next
 
-    def getKth(self, node, k):
+    def getKth(self, node: ListNode, k: int) -> ListNode:
         while node and k:
             node = node.next
             k -= 1
         return node
+
+    def reverse(self, start: ListNode, end: ListNode) -> (ListNode, ListNode):
+        prev, cur = end, start
+        while cur != end:
+            temp = cur.next
+            cur.next = prev
+            prev = cur
+            cur = temp
+        return prev, start
 
 
