@@ -19,6 +19,7 @@ var reverseKGroup = function(head, k) {
 
         // 反转k个链表
         let groupNext = kth.next;
+        //! start: groupPrev.next | end: gtoupNext 
         let [newHead, newTail] = reverse(groupPrev.next, groupNext);
         // 连接
         groupPrev.next = newHead;
@@ -37,10 +38,11 @@ function getKth(node, k) {
     return node;
 }
 
+//* reverse: 将cur指向prev
 function reverse(start, end) {
     let prev = end;
     let cur = start;
-    while (cur !== end) {
+    while (cur !== end) {  //! end不应该改变
         let temp = cur.next;
         cur.next = prev;
         prev = cur;

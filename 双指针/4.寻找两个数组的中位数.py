@@ -4,8 +4,7 @@ class Solution:
         if m > n:
             nums1, nums2, m, n = nums2, nums1, n, m
         if n == 0:
-            raise ValueError
-
+o
         imin, imax, half_len = 0, m, (m + n + 1) // 2
         while imin <= imax:
             i = (imin + imax) // 2

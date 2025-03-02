@@ -3,20 +3,19 @@
  * @return {number[][]}
  */
 var merge = function(intervals) {
-    if (intervals.length <= 1) {
-        return intervals;
-    }
-    
-    intervals.sort((a, b) => a[0] - b[0]); // a - b 递增 
-    const merged = [intervals[0]]
+    if (intervals.length < 2) return intervals;
+    // 按照每个元素的第一项排序
+    intervals.sort((a, b) => a[0] - b[0]);  // a - b递增
+    //* 在原数组上合并比较复杂，可以创建新数组
+    const merged = [intervals[0]];
     for (let i = 1; i < intervals.length; i++) {
-        const interval = intervals[i];
-        if (merged[merged.length - 1][1] >= interval[0]) {
-            merged[merged.length - 1][1] = Math.max(merged[merged.length - 1][1], interval[1]);
+        const mergedLastIndex = merged.length - 1;
+        //! 处理 合并/不合并 两种情况
+        if (intervals[i][0] <= merged[mergedLastIndex][1]) {
+            merged[mergedLastIndex][1] = Math.max(intervals[i][1], merged[mergedLastIndex][1]);
         } else {
-            merged.push(interval);
+            merged.push(intervals[i]);
         }
     }
-
     return merged;
 };

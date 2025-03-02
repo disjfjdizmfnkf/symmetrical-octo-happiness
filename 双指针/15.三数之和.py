@@ -6,6 +6,7 @@ class Solution:
         nums.sort()  # 先对数组进行排序
 
         for i in range(len(nums) - 2):
+            # 如果后面的数字和前面的数字重复就跳过这些数字, 
             # 跳过重复的数字 注意防止越界 if nums[i] == nums[i + 1]:
             if i > 0 and nums[i] == nums[i - 1]:
                 continue

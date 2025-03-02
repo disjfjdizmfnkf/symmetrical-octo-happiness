@@ -8,7 +8,7 @@ var lengthOfLongestSubstring = function(s) {
     for (let r = 0; r < s.length; r++) {
         while (wind.has(s[r])) {
             wind.delete(s[l]);
-            l++;
+            l++;  //! 放在while的最后
         };
         wind.add(s[r]);
         res = Math.max(res, r - l + 1);
