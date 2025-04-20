@@ -10,6 +10,7 @@
  * @param {TreeNode} root
  * @return {TreeNode}
  */
+//! 注意函数预期返回的类型是treeNode
 var invertTree = function (root) {
   if (!root) return null;
   //! 同时赋值, 避免一边的数组已经改变了

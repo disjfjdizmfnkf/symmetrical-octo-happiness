@@ -7,10 +7,11 @@ var firstMissingPositive = function (nums) {
 
   // 将每个数放到正确的位置上
   for (let i = 0; i < n; i++) {
-    //* 需要在正确的位置 && 当前位置的数字不在正确位置 
-    while (1 <= nums[i] && nums[i] <= n && nums[nums[i] - 1] !== nums[i]) {
-      //! num[i] 要后修改, nums[nums[i] - 1]使用到了 num[i]
-      [nums[nums[i] - 1], nums[i]] = [nums[i], nums[nums[i] - 1]];
+    let num = nums[i];
+    //* 需要在正确的位置 && 数字num 对应索引num - 1
+    while (1 <= num && num <= n && nums[num - 1] !== num) {
+      //! num[i] 要后修改, nums[num - 1]使用到了 num[i]
+      [nums[num - 1], num] = [num, nums[num - 1]];
     }
   }
 

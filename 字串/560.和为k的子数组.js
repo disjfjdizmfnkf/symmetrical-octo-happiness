@@ -3,19 +3,18 @@
  * @param {number} k
  * @return {number}
  */
-var subarraySum = function(nums, k) {
-    let prefixSum = 0;
-    // 记录此时之前的前缀和的出现次数
-    let countPrefix = {0: 1};  //! 0是一个隐藏的前缀和
-    let res = 0;
-    for (let num of nums) {
-        prefixSum += num;
-        // 先计算之前满足要求的子数组，否则会出错 eg. nums:[] k:1
-        if ((prefixSum - k) in countPrefix) {
-            res += countPrefix[prefixSum - k];
-        }
-        // 之后再将这个加入count计数
-        countPrefix[prefixSum] = (countPrefix[prefixSum] || 0) + 1;
+var subarraySum = function (nums, k) {
+  const countPrefix = { 0: 1 }; //! 初始存在的前缀和
+  let prefixSum = 0;
+  let res = 0;
+  for (const num of nums) {
+    prefixSum += num;
+    //! 加上所有满足条件的前缀
+    if (prefixSum - k in countPrefix) {
+      res += countPrefix[prefixSum - k];
     }
-    return res;
+    //! 数字有正有负, 前缀和可以有相同的
+    countPrefix[prefixSum] = (countPrefix[prefixSum] || 0) + 1; //* 如果不存在自动初始化
+  }
+  return res;
 };

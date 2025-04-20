@@ -18,12 +18,12 @@ var maxSubArray = function(nums) {
 // 一遍循环
 var maxSubArray = function(nums) {
     let prefix = 0;
-    let res = nums[0];
+    let res = nums[0];  //! 初始化为第一个数
     let minPrefix = 0;
     for (const num of nums) {
         prefix += num;  //! 开始时计算
         res = Math.max(res, prefix - minPrefix);
-        minPrefix = Math.min(minPrefix, prefix);
+        minPrefix = Math.min(minPrefix, prefix);  //! 第一次最小前缀和为0,不应该先更新
     }
     return res;
 };

@@ -37,7 +37,7 @@ const findKth = function (nums1, start1, nums2, start2, k) {
   if (len1 === 0) return nums2[start2 + k - 1];
   // k为1时，直接返回较小的元素
   if (k === 1) return Math.min(nums1[start1], nums2[start2]);
-  // 确定比较的位置
+  // 确定比较的位置 p需要判断短数组的长度够不够
   const p = Math.min(k >> 1, len1), q = k >> 1;
   const idx1 = start1 + p - 1, idx2 = start2 + q - 1;
   // 递归排除元素

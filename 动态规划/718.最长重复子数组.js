@@ -3,7 +3,7 @@
  * @param {number[]} nums2
  * @return {number}
  */
-//! dp[i][j]  nums1以i结尾 和 nums2以j结尾时的最长重复子数组
+//! dp[i][j]  以nums1[i]、nums2[j]结尾的重复子数组
 //! 子数组是连续的
 var findLength = function (nums1, nums2) {
   let res = 0;

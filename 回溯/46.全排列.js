@@ -21,3 +21,22 @@ var permute = function (nums) {
   backtrack([], nums);
   return res;
 };
+
+var permute = function (nums) {
+  const res = [];
+  const used = new Array(nums.length).fill(false);
+  function backtrack(combine) {
+    if (combine.length === nums.length) {
+      res.push(combine);
+      return;
+    }
+    for (let i = 0; i < nums.length; i++) {
+      if (used[i]) continue;
+      used[i] = true;
+      backtrack([...combine, nums[i]]);
+      used[i] = false;
+    }
+  }
+  backtrack([]);
+  return res;
+};

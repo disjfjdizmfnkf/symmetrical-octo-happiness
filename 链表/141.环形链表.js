@@ -10,6 +10,18 @@
  * @param {ListNode} head
  * @return {boolean}
  */
+//* time: O(1)
+var hasCycle = function(head) {
+    let s = head, f = head;
+    while(f && f.next) {
+        s = s.next;
+        f = f.next.next;
+        if (s === f) return true;
+    }
+    return false;
+};
+
+//* 通解
 var hasCycle = function(head) {
     const memo = new Set();
     while (head) {

@@ -9,6 +9,7 @@ var lengthOfLIS = function (nums) {
   let res = 1;
   for (let i = 0; i < nums.length; i++) {
     for (let j = 0; j < i; j++) {
+      //! dp[i]的含义决定了只计算以i结尾的递增的情况
       if (nums[i] > nums[j]) {
         dp[i] = Math.max(dp[i], dp[j] + 1);
       }
@@ -17,3 +18,6 @@ var lengthOfLIS = function (nums) {
   }
   return res;
 };
+
+//! 返回子序列 
+

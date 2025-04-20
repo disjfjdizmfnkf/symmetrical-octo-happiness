@@ -11,7 +11,7 @@
  * @return {number}
  */
 var maxPathSum = function(root) {
-    let res = Number.MIN_VALUE;
+    let res = -Infinity;
     function dfs(node) {
         if (!node) return 0;
         const left = Math.max(dfs(node.left), 0);

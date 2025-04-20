@@ -3,6 +3,7 @@
  * @return {string}
  */
 var thousandSeparator = function (n) {
+  //! 两个量词不能放在一起
   return String(n).replace(/(\d)(?=(\d{3})+$)/g, "$1" + ".");
 };
 

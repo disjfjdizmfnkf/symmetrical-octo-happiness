@@ -17,7 +17,7 @@ var findKthLargest = function(nums, k) {
         }
     }
     if (k <= greater.length) {  //! rightBorder is contained 长度对应的就是个数
-        return findKthLargest(greater, k);
+        return findKthLargest(greater, k); //! 记得返回
     } else if (k > greater.length + equal.length) {
         return findKthLargest(less, k - greater.length - equal.length);
     } else {

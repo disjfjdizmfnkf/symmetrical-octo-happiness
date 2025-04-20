@@ -1,5 +1,5 @@
 
-# (val, now_min_val) 使用元组第二个位置存储现在状态的栈中的最小值
+# (val, now_min_val) 保存当前值和当前最小值
 class MinStack(object):
 
     def __init__(self):
