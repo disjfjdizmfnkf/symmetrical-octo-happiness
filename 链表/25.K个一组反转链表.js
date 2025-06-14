@@ -11,10 +11,10 @@
  * @return {ListNode}
  */
 var reverseKGroup = function(head, k) {
-    let dummy = new ListNode(0, head);
+    const dummy = new ListNode(0, head);
     let groupPrev = dummy;
     while (true) {
-        let kth = getKth(groupPrev, k);
+        let kth = getKth(groupPrev, k);  // NOTE: 获取的是groupPrev的之后k个node,而不是dummy
         if (!kth) break;
 
         // 反转k个链表

@@ -2,6 +2,7 @@
  * @param {string} s
  * @return {number}
  */
+// NOTE: 滑动窗口问题 - 唯一性问题: 先检查重复
 var lengthOfLongestSubstring = function(s) {
     const wind = new Set();
     let res = 0, l = 0;

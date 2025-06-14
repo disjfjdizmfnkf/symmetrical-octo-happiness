@@ -26,7 +26,7 @@ var zigzagLevelOrder = function (root) {
       if (node.right) queue.push(node.right);
       // 通过遍历方向确定是前加还是后加
       if (isLeftToRight) {
-        layer.push(node.val);
+        layer.push(node.val); //NOTE: 注意返回值要求
       } else {
         layer.unshift(node.val);
       }
