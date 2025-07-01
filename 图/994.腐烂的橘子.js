@@ -1,41 +1,43 @@
-  /**
-   * @param {number[][]} grid
-   * @return {number}
-   */
-  var orangesRotting = function (grid) {
-    const R = grid.length, C = grid[0].length;
-    const direction = [[0, 1], [0, -1], [1, 0], [-1, 0]];
-    const age = new Map();
-    const queue = [];
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var orangesRotting = function (grid) {
+  let rows = grid.length, cols = grid[0].length;
+  let directions = [[-1, 0], [0, -1], [1, 0], [0, 1]];
+  let queue = [];  // 存放腐烂橘子坐标
+  let depth = new Map();  // 存放每个橘子腐烂的时间
 
-    for (let r = 0; r < R; r++) {
-      for (let c = 0; c < C; c++) {
-        if (grid[r][c] === 2) {
-          const code = r * C + c;
-          queue.push(code);
-          age.set(code, 0); //NOTE: 初始化时间为0
-        }
+  for (let r = 0; r < R; ++r) {
+    for (let c = 0; c < C; ++c) {
+      if (grid[r][c] === 2) {
+        const code = r * C + c;
+        queue.push(code);
+        depth.set(code, 0);
       }
     }
+  }
 
-    let res = 0;
-    while (queue.length) {
-      const code = queue.shift();
-      const r = Math.floor(code / C), c = Math.floor(code % C);
-      for (const d of direction) {
-        const nr = r + d[0];
-        const nc = c + d[1];
-
-        if (nr >= 0 && nr < R && nc >= 0 && nc < C && grid[nr][nc] === 1) {
-          grid[nr][nc] = 2;
-          const ncode = nr * C + nc;
-          queue.push(ncode);
-          age.set(ncode, age.get(code) + 1);
-          res = age.get(ncode);
-        }
+  const ans = 0;
+  while (queue.length > 0) {
+    let code = queue.shift();
+    let r = Math.floor(code / cols), c = code % cols;
+    for (let d of directions) {
+      let nr = r + d[0], nc = c + d[1];
+      if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr][nc] === 1) {
+        grid[nr][nc] = 2;
+        let newCode = nr * cols + nc;
+        queue.push(newCode);
+        depth.set(newCode, depth.get(code) + 1);
+        ans = depth.get(newCode);
       }
+
     }
 
     const fresh = grid.reduce((acc, row) => acc + row.reduce((acc, cur) => acc + (cur === 1 ? 1 : 0), 0), 0)
     return fresh > 0 ? -1 : res;
   }
+
+  const refreshCount = grid.reduce((acc, row) => acc + row.reduce((acc, v) => acc + (v === 1 ? 1 : 0), 0), 0);
+  return refreshCount > 0 ? -1 : ans;
+}

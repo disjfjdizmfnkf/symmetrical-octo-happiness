@@ -19,7 +19,7 @@ var decodeString = function (s) {
       const count = stack.pop();
       const prevString = stack.pop();
       curString = prevString + curString.repeat(count);
-    } else if (!isNaN(Number(char))) {
+    } else if (isNumber) {
       // 修改curNum
       curNum = curNum * 10 + +char;
     } else {
@@ -29,3 +29,5 @@ var decodeString = function (s) {
   }
   return curString;
 }
+
+const isNumber = (char) => /^[0-9]$/.test(char);
