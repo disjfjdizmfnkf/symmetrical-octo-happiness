@@ -5,7 +5,7 @@
 var largestRectangleArea = function (heights) {
   let res = 0;
   const st = []; // 存放索引
-  heights.push(0);  // NOTE: 添加哨兵元素确保特殊情况下触发计算case
+  heights.push(0); // NOTE: 添加哨兵元素确保特殊情况下触发计算case
   heights.unshift(0);
   for (let i = 0; i < heights.length; i++) {
     // NOTE: 栈中元素是单调递增的, 遇到小的元素时pop 触发计算逻辑(means this is the right border of the box)
@@ -19,7 +19,7 @@ var largestRectangleArea = function (heights) {
       // WARN: 小于的元素作为边界并不包含
       const left = st[st.length - 1] + 1;
       const right = i - 1;
-      res = Math.max(res, (right - left + 1) * heights[cur])
+      res = Math.max(res, (right - left + 1) * heights[cur]);
     }
     st.push(i);
   }
