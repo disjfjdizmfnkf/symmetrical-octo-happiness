@@ -14,6 +14,7 @@
 var lowestCommonAncestor = function (root, p, q) {
   if (!root) return;
   //! 为什么返回的是root? 如果两个节点都在一边, p, q都会返回自身,而root收到的return就是最靠近root的节点也就是祖先
+  // NOTE: p是一个节点、一个对象，不能和root.val比较
   if (root === p || root === q) return root;
   //! 写糊涂了，忘了是在子树上递归
   const left = lowestCommonAncestor(root.left, p, q);

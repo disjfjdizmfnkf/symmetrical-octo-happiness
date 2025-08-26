@@ -8,7 +8,7 @@
  */
 /**
  * @param {TreeNode} root
- * @return {number[][]}
+ * @return {number[][]}  // NOTE: 数字
  */
 var zigzagLevelOrder = function (root) {
   if (!root) return []; //! 记得处理特殊情况

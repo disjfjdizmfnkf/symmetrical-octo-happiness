@@ -22,7 +22,7 @@ var maxSubArray = function (nums) {
   let res = nums[0];  //! 初始化为第一个数
   let minPrefix = 0;
   for (const num of nums) {
-    prefix += num;  //! 开始时计算
+    prefix += num;  //!NOTE: 开始时prefix的值为0，但是对于第一个位置，此时的前缀就是第一个数字
     res = Math.max(res, prefix - minPrefix);
     minPrefix = Math.min(minPrefix, prefix);  //! 第一次最小前缀和为0,不应该先更新
   }
