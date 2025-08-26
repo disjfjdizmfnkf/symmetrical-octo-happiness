@@ -14,7 +14,7 @@ var reorderList = function (head) {
   let head2 = midNode.next;
   midNode.next = null;
   head2 = reverseList(head2);
-  while (head2) {
+  while (head2) {  //! head要么和head一样长要么更短,这是由getMidNode函数决定的
     //* 保存两个指针的下一个节点
     const nxt = head.next;
     const nxt2 = head2.next;

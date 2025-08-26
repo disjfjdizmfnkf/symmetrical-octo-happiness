@@ -10,7 +10,7 @@ var longestValidParentheses = function (s) {
     if (s[i] === "(") {
       stack.push(i);
     } else {
-      stack.pop();
+      stack.pop(); //* 弹出被匹配的左括号
       if (stack.length === 0) {
         stack.push(i);
       } else {
@@ -18,6 +18,5 @@ var longestValidParentheses = function (s) {
       }
     }
   }
-
   return res;
 };
